@@ -37,6 +37,9 @@
 
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
+(add-to-list 'package-archives '("SC" . "http://joseito.republika.pl/sunrise-commander/") t)
+
 ;; set package-user-dir to be relative to Prelude install path
 (setq package-user-dir (expand-file-name "elpa" prelude-dir))
 (package-initialize)
@@ -74,7 +77,11 @@
     smartrep
     undo-tree
     volatile-highlights
-    zenburn-theme)
+    zenburn-theme
+    yasnippet
+    dropdown-list org org-journal ox-reveal org-plus-contrib org-fstree
+    ggtags header2 sunrise-commander sunrise-x-buttons sunrise-x-popviewer
+    htmliz)
   "A list of packages to ensure are installed at launch.")
 
 (defun prelude-packages-installed-p ()

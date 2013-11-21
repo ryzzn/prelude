@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: log error with return code
+# key: ler
+# --
+TBSYS_LOG(ERROR, "${1:print some error msg}, ret: [%d]", ret);$>
+$0$>

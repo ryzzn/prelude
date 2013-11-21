@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: header
+# key: header
+# expand-env: ((title (upcase (file-name-nondirectory (file-name-sans-extension (buffer-file-name))))) (date (format-time-string "%Y-%m-%d %T")))
+# --
+#+Title: ${1:`title`}
+#+Author: 施宇迪
+#+Date: `date`
+#+DESCRIPTION: desc
+#+KEYWORDS: 施宇迪 SYDI
+#+OPTIONS: comment-box:t homepage:nil
+#+Time-Stamp: `date`
+
+$0

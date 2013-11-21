@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: beamer
+# key: beamer
+# expand-env: ((title (upcase (file-name-nondirectory (file-name-sans-extension (buffer-file-name))))) (date (format-time-string "%Y-%m-%d %T")))
+# --
+#+LaTeX_CLASS: beamer
+#+Title: ${1:`title`}
+#+AUTHOR: 施宇迪
+#+EMAIL: a@sydi.org
+#+Date: `date`
+#+COLUMNS: %35ITEM %10BEAMER_env(Env) %10BEAMER_envargs(Args) %4BEAMER_col(Col) %8BEAMER_extra(Ex)
+#+LaTeX_CLASS_OPTIONS: [presentation,xetex]
+#+BEAMER_HEADER_EXTRA:  \institute{Alibaba Group}
+#+BEAMER_FRAME_LEVEL: 2
+#+Time-Stamp: `date`
+
+$0

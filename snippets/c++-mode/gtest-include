@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: gtest-include
+# key: gti
+# --
+#include <gtest/gtest.h>
+$0
