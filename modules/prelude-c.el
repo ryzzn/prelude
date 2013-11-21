@@ -72,11 +72,7 @@
   ;; (setq lazy-lock-defer-contextually t)
   ;; (setq lazy-lock-defer-time 0)
 
-  (setq gtags-suggested-key-mapping t)
-  (gtags-mode 1)
-
-  (require 'fic-mode)
-  (add-hook 'c++-mode-hook 'turn-on-fic-mode)
+  (ggtags-mode 1)
 
   (require 'oceanbase-style)
   (setq comment-start "/* ")
@@ -92,11 +88,11 @@
 ;; c++-mode for h files.
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.ipp\\'" . c++-mode))
-(add-hook 'c++-mode-hook 'sydi/c++-mode-hook)
 
 (defun prelude-c-mode-common-defaults ()
   (setq c-basic-offset 4)
-  (c-set-offset 'substatement-open 0))
+  (c-set-offset 'substatement-open 0)
+  (sydi/c++-mode-hook))
 
 (setq prelude-c-mode-common-hook 'prelude-c-mode-common-defaults)
 
