@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: gtest-fixture
+# key: gtf
+# expand-env: ((class-name (replace-regexp-in-string "\\W" "" (upcase-initials (file-name-nondirectory (file-name-sans-extension (buffer-file-name)))))))
+# --
+TEST_F(${1:`class-name`}, ${2:TestName})
+{
+  $0
+}

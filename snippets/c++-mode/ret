@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: ret
+# key: ret
+# --
+int ret = OB_SUCCESS;
+$0$>

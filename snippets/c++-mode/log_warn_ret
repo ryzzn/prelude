@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: log warn with return code
+# key: lwr
+# --
+TBSYS_LOG(WARN, "${1:print some error msg}, ret: [%d]", ret);$>
+$0$>
