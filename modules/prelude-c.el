@@ -72,12 +72,6 @@
   ;; (setq lazy-lock-defer-contextually t)
   ;; (setq lazy-lock-defer-time 0)
 
-  (setq gtags-suggested-key-mapping t)
-  (gtags-mode 1)
-
-  (require 'fic-mode)
-  (add-hook 'c++-mode-hook 'turn-on-fic-mode)
-
   (require 'oceanbase-style)
   (setq comment-start "/* ")
   (setq comment-end " */")
