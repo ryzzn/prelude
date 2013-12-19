@@ -12,7 +12,7 @@
 (defvar sydi/homepage-p nil "Indicate whether the page is home page")
 (defvar sydi/single-p t "Indicate whether a single post page or not")
 
-(defvar sydi/atom-exclude-file-list '("douban\\.org$") "exclude files exporting to atom file")
+(defvar sydi/atom-exclude-file-list '("douban\\.org$" "^personal") "exclude files exporting to atom file")
 (defvar sydi/atom-max-export-files-num 10 "max files to export")
 
 (require 'ox)
@@ -168,34 +168,34 @@
 Optionally set the filename of the sitemap with SITEMAP-FILENAME.
 Default for SITEMAP-FILENAME is 'sitemap.org'."
   (let* ((project-plist (cdr project))
-	 (dir (file-name-as-directory
-	       (plist-get project-plist :base-directory)))
-	 (localdir (file-name-directory dir))
-	 (indent-str "")
-	 (exclude-regexp (plist-get project-plist :exclude))
-	 (files (nreverse (org-publish-get-base-files project exclude-regexp)))
-	 (sitemap-filename (concat dir (or sitemap-filename "sitemap.org")))
-	 (sitemap-title (or (plist-get project-plist :sitemap-title)
-			    (concat "Sitemap for project " (car project))))
-	 (sitemap-sans-extension (plist-get project-plist :sitemap-sans-extension))
-	 (visiting (find-buffer-visiting sitemap-filename))
-	 (ifn (file-name-nondirectory sitemap-filename))
-	 file sitemap-buffer)
+         (dir (file-name-as-directory
+               (plist-get project-plist :base-directory)))
+         (localdir (file-name-directory dir))
+         (indent-str "")
+         (exclude-regexp (plist-get project-plist :exclude))
+         (files (nreverse (org-publish-get-base-files project exclude-regexp)))
+         (sitemap-filename (concat dir (or sitemap-filename "sitemap.org")))
+         (sitemap-title (or (plist-get project-plist :sitemap-title)
+                            (concat "Sitemap for project " (car project))))
+         (sitemap-sans-extension (plist-get project-plist :sitemap-sans-extension))
+         (visiting (find-buffer-visiting sitemap-filename))
+         (ifn (file-name-nondirectory sitemap-filename)) file sitemap-buffer)
     (with-current-buffer (setq sitemap-buffer
-			       (or visiting (find-file sitemap-filename)))
+                               (or visiting (find-file sitemap-filename)))
       (message "Generating tree-style sitemap for %s" sitemap-title)
       (erase-buffer)
       (insert (concat "#+TITLE: " sitemap-title "\n\n"))
       (insert "#+BEGIN_HTML\n<div class=\"panes\">\n#+END_HTML\n")
       (while (setq file (pop files))
-	(let ((fn (file-name-nondirectory file))
-	      (link (file-relative-name file dir))
-	      (oldlocal localdir))
-	  (when sitemap-sans-extension
-	    (setq link (file-name-sans-extension link)))
-	  ;; sitemap shouldn't list itself
-	  (unless (equal (file-truename sitemap-filename)
-			 (file-truename file))
+        (let ((fn (file-name-nondirectory file))
+              (link (file-relative-name file dir))
+              (date (format-time-string "%Y-%m-%d" (sydi/get-org-file-date file)))
+              (oldlocal localdir))
+          (when sitemap-sans-extension
+            (setq link (file-name-sans-extension link)))
+          ;; sitemap shouldn't list itself
+          (unless (equal (file-truename sitemap-filename)
+                         (file-truename file))
             (setq localdir (concat (file-name-as-directory dir)
                                    (file-name-directory link)))
             (unless (string= localdir oldlocal)
@@ -221,20 +221,22 @@ Default for SITEMAP-FILENAME is 'sitemap.org'."
                     ;; (insert (concat indent-str " + " d "\n"))
                     (insert (concat "\n* " d "\n")))))
               )
-	    ;; This is common to 'flat and 'tree
-	    (let ((entry
-		   (org-publish-format-file-entry "%t" file project-plist))
-		  (regexp "\\(.*\\)\\[\\([^][]+\\)\\]\\(.*\\)"))
-	      (cond ((string-match-p regexp entry)
-		     (string-match regexp entry)
-		     (insert (concat indent-str " + " (match-string 1 entry)
-				     "[[file:" link "]["
-				     (match-string 2 entry)
-				     "]]" (match-string 3 entry) "\n")))
-		    (t
-		     (insert (concat indent-str " + [[file:" link "]["
-				     entry
-				     "]]\n"))))))))
+            ;; This is common to 'flat and 'tree
+            (let ((entry
+                   (org-publish-format-file-entry "%t" file project-plist))
+                  (regexp "\\(.*\\)\\[\\([^][]+\\)\\]\\(.*\\)"))
+              (cond ((string-match-p regexp entry)
+                     (string-match regexp entry)
+                     (insert (concat indent-str " + " (match-string 1 entry)
+                                     "[[file:" link "]["
+                                     (match-string 2 entry)
+                                     "]]@@html:<span class=\"page-item-date\">@@"
+                                     date " @@html:</span>@@" (match-string 3 entry) "\n")))
+                    (t
+                     (insert (concat indent-str " + [[file:" link "]["
+                                     entry
+                                     "]]@@html:<span class=\"page-item-date\">@@"
+                                     date " @@html:</span>@@\n"))))))))
       (insert "\n#+BEGIN_HTML\n</div>\n#+END_HTML\n")
       (save-buffer))
     (or visiting (kill-buffer sitemap-buffer))))
@@ -282,7 +284,6 @@ Default for SITEMAP-FILENAME is 'sitemap.org'."
            :email "a@sydi.org"
            :language "zh-CN"
            :style "
-<link rel=\"stylesheet\" href=\"/css/site.css\" />
 <link rel=\"stylesheet\" href=\"/css/style.css\" />
 <link href=\"/images/logo.png\" rel=\"icon\" type=\"image/x-icon\" />
 <link href=\"/atom.xml\" type=\"application/atom+xml\" rel=\"alternate\" title=\"sydi.org atom\" />
@@ -298,7 +299,8 @@ Default for SITEMAP-FILENAME is 'sitemap.org'."
   "Publish Worg in htmlized pages."
   (interactive)
   (let ((org-format-latex-signal-error nil)
-        (org-startup-folded nil))
+        (org-startup-folded nil)
+        (org-export-date-timestamp-format "%Y-%m-%d"))
     (set-org-publish-project-alist)
     (message "Emacs %s" emacs-version)
     (org-version)
@@ -359,23 +361,27 @@ Default for SITEMAP-FILENAME is 'sitemap.org'."
   <author>
     <name><![CDATA[%s]]></name><email>%s</email>
   </author>
-  <generator uri=\"%s\">orgmode4sydi</generator>"
+  <generator uri=\"%s\">ryan's orgmode generator</generator>"
                  title subtitle self-link link
                  (web-time-string)
                  id author email sydi/site-url))
         (dolist (file org-files)
+          (message file)
           (let ((org-file-buffer (find-file file)))
             (set-buffer org-file-buffer)
-            (let* ((plist (org-infile-export-plist))
+            (let* ((plist (org-export--get-inbuffer-options))
                    (title (or
                            (plist-get plist :title)
                            "UNTITLED"))
                    (date (web-time-string
-                          (org-time-string-to-time (or
-                                                    (plist-get plist :date)
-                                                    (format-time-string
-                                                     (org-time-stamp-format)
-                                                     (cons 0 0))))))
+                          (org-time-string-to-time
+                           (let ((inbuf-date (plist-get plist :date)))
+                             (if inbuf-date
+                                 (substring-no-properties (car inbuf-date))
+                               (format-time-string
+                                (org-time-stamp-format)
+                                (cons 0 0))
+                               )))))
                    (url (concat
                          (replace-regexp-in-string
                           (file-truename sydi/base-directory)
@@ -410,25 +416,32 @@ If #+date keyword is not set and `other' equals to \"modify\", return the file s
   (let ((visiting (find-buffer-visiting file)))
     (save-excursion
       (org-pop-to-buffer-same-window (or visiting (find-file-noselect file nil t)))
-      (let* ((plist (org-infile-export-plist))
-	     (date (plist-get plist :date)))
-	(unless visiting
-	  (kill-buffer (current-buffer)))
-	(if date
-	    (org-time-string-to-time date)
-	  (when (file-exists-p file)
+      (let* ((plist (org-export--get-inbuffer-options))
+             (date (plist-get plist :date)))
+        (unless visiting
+          (kill-buffer (current-buffer)))
+        (if date
+            (org-time-string-to-time (substring-no-properties (car date)))
+          (when (file-exists-p file)
             (cond ((equal other "access") (nth 4 (file-attributes file)))
                   ((equal other "modify") (nth 5 (file-attributes file)))
                   ((equal other "change") (nth 6 (file-attributes file)))
                   (t '(0 0)))))))))
+
+(defun sydi/get-org-file-date-str (file)
+  "Return org file date"
+  (let ((visiting (find-buffer-visiting file)))
+    (save-excursion
+      (org-pop-to-buffer-same-window (or visiting (find-file-noselect file nil t)))
+      (plist-get (org-infile-export-plist) :date))))
 
 (require 'find-lisp)
 (defun sydi/get-sorted-org-files (root-dir)
   "return a sorted org files list"
   (let ((org-files (remove-if
                     (lambda (ele) (member-if
-                              (lambda (match-reg) (string-match-p match-reg ele))
-                              sydi/atom-exclude-file-list))
+                                   (lambda (match-reg) (string-match-p match-reg (file-name-nondirectory ele)))
+                                   sydi/atom-exclude-file-list))
                     (find-lisp-find-files root-dir "\\.org$")))
         (org-alist))
     (mapc
@@ -444,7 +457,8 @@ If #+date keyword is not set and `other' equals to \"modify\", return the file s
                            (bdate (sydi/get-org-file-date (car b)))
                            (A (+ (lsh (car adate) 16) (cadr adate)))
                            (B (+ (lsh (car bdate) 16) (cadr bdate))))
-                      (>= A B)))))))
+                      (>= A B)))))
+    org-files))
 
 ;;; for sitemap.xml
 (defun sydi/all-urls (root-dir prefix)
