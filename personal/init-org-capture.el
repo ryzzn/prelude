@@ -1,6 +1,10 @@
 ;;; Time-stamp: <2013-10-29 11:21:38 ryan>
 
+;;; Code:
 (require 'org-capture)
+(setq consumption-filename
+      (concat "~/sydi.org/org/life/personal-consumption-"
+              (downcase (format-time-string "%Y-%B")) ".org"))
 
 (setq org-default-notes-file (concat org-directory "/notes.org"))
 (define-key global-map "\C-cc" 'org-capture)
@@ -16,7 +20,11 @@
          "* %U\n%?%i")
         ("o" "Reading Oceanbase" entry (file "~/documents/reading/oceanbase.org")
          "* %?\n [[%l][follow]] -- [%U]\n  %i")
+        ("c" "consumption" table-line (file consumption-filename))
         ("l" "Reading SQLite" entry (file "~/documents/reading/sqlite.org")
          "* %?\n [[%l][follow]] -- [%U]\n  %i")))
 
 (provide 'init-org-capture)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; init-org-capture.el ends here
