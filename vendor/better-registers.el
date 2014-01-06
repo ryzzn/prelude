@@ -75,7 +75,7 @@
 (defvar better-registers-version "0.58"
   "The version of the package better-registers.
    Revision history:
-   from 0.57 to 0.58 Improved interactive argument handling of better-registers-save-registers. 
+   from 0.57 to 0.58 Improved interactive argument handling of better-registers-save-registers.
    from 0.57 to 0.57 Can now correctly save fontified strings, added convenient macro key (f1)
    from 0.55 to 0.56 No longer blocks enter in the minibuffer
    from 0.5 to 0.55 changed it to a minor mode
@@ -101,8 +101,8 @@
 (define-key better-registers-map [S-f1] 'better-registers-toggle-macro-recording)
 (define-key better-registers-map "\C-j" 'better-registers-jump-to-register)
 (define-key better-registers-map "\C-xj" 'better-registers-jump-to-register)
-(define-key better-registers-map "\C-xr" 'isearch-backward) ;free C-r
-(define-key better-registers-map "\C-r" ;Shadow C-r global
+;; (define-key better-registers-map "\C-xr" 'isearch-backward) ;free C-r
+(define-key better-registers-map "\C-xr" ;Shadow C-r global
   better-registers-r-map)
 (define-key better-registers-r-map "n" 'number-to-register)
 (define-key better-registers-r-map "+" 'increment-register)
