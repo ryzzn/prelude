@@ -7,9 +7,9 @@
 (setq org-export-with-sub-superscripts nil)
 ;; 使用xelatex一步生成PDF
 (setq org-latex-pdf-process
-      '("xelatex -interaction nonstopmode %f"
-        "xelatex -interaction nonstopmode %f"
-        "xelatex -interaction nonstopmode %f"))
+      '("xelatex -shell-escape -interaction nonstopmode %f"
+        "xelatex -shell-escape -interaction nonstopmode %f"
+        "xelatex -shell-escape -interaction nonstopmode %f"))
 
 (add-to-list 'org-file-apps '("pdf" . "zathura %s"))
 
@@ -37,7 +37,7 @@
 
 (add-to-list 'org-latex-classes
              '("cn-article"
-               "\\documentclass[10pt,a4paper]{article}
+               "\\documentclass[12pt,a4paper]{article}
 \\usepackage{graphicx}
 \\usepackage{xcolor}
 \\usepackage{xeCJK}
@@ -70,7 +70,7 @@ menucolor=blue]{hyperref}
 \\newfontinstance\\MONO{\\fontnamemono}
 \\newcommand{\\mono}[1]{{\\MONO #1}}
 \\setCJKmainfont[Scale=0.9]{文泉驿正黑}%中文字体
-\\setCJKmonofont[Scale=0.9]{Monaco}
+\\setCJKmonofont[Scale=0.9]{文泉驿等宽正黑}
 \\hypersetup{unicode=true}
 \\geometry{a4paper, textwidth=6.5in, textheight=10in,
 marginparsep=7pt, marginparwidth=.6in}
@@ -100,6 +100,43 @@ marginparsep=7pt, marginparwidth=.6in}
 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
 ("\\paragraph{%s}" . "\\paragraph*{%s}")
 ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+
+(add-to-list 'org-latex-classes
+             '("org-article"
+               "\\documentclass{org-article}
+\\usepackage{graphicx}
+\\usepackage{xcolor}
+\\usepackage{xeCJK}
+\\usepackage{lmodern}
+\\usepackage{verbatim}
+\\usepackage{fixltx2e}
+\\usepackage{longtable}
+\\usepackage{float}
+\\usepackage{tikz}
+\\usepackage{wrapfig}
+\\usepackage{soul}
+\\usepackage{textcomp}
+\\usepackage{geometry}
+\\usepackage{algorithm}
+\\usepackage{algorithmic}
+\\usepackage{marvosym}
+\\usepackage{wasysym}
+\\usepackage{latexsym}
+\\usepackage{natbib}
+\\usepackage{fancyhdr}
+\\usepackage{fontspec,xunicode,xltxtra}
+\\setCJKmainfont[Scale=0.9]{文泉驿正黑}%中文字体
+\\setCJKmonofont[Scale=0.9]{文泉驿等宽正黑}
+\\fancyfoot[C]{\\bfseries\\thepage}
+\\pagestyle{fancy}
+                [NO-DEFAULT-PACKAGES]
+                [PACKAGES]
+                [EXTRA]"
+               ("\\section{%s}" . "\\section*{%s}")
+               ("\\subsection{%s}" . "\\subsection*{%s}")
+               ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+               ("\\paragraph{%s}" . "\\paragraph*{%s}")
+               ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
 
 ;; 使用Listings宏包格式化源代码(只是把代码框用listing环境框起来，还需要额外的设置)
 (setq org-latex-listings nil)
@@ -169,7 +206,8 @@ style=\"text-decoration:underline;\">" "</span>")
                                         ("~" "\\verb~%s~" t)
                                         ("@" "\\alert{%s}" nil)))
       )
-
+(setq org-latex-listings 'minted)
+(add-to-list 'org-latex-packages-alist '("" "minted"))
 (setq org-latex-default-packages-alist
       '(("" "fixltx2e" nil)
         ("" "graphicx" t)
@@ -185,6 +223,8 @@ style=\"text-decoration:underline;\">" "</span>")
         ("" "hyperref" nil)
         ("" "zhfontcfg" nil)
         ("" "listings" nil)
+        ("" "minted" nil)
+        ("AUTO" "inputenc" t)
         ;; ("" "verbatim" nil)
         "\\tolerance=1000"))
 
