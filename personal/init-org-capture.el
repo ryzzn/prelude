@@ -2,9 +2,12 @@
 
 ;;; Code:
 (require 'org-capture)
-(setq consumption-filename
-      (concat "~/sydi.org/org/life/personal-consumption-"
-              (downcase (format-time-string "%Y-%B")) ".org"))
+(defvar consumption-filename
+  (concat "~/sydi.org/org/life/personal-consumption-"
+          (downcase (format-time-string "%Y-%B")) ".org"))
+(defvar interesting-links-filename
+  (concat "~/sydi.org/org/reading/interesting-links-"
+          (downcase (format-time-string "%Y-%B")) ".org"))
 
 (setq org-default-notes-file (concat org-directory "/notes.org"))
 (define-key global-map "\C-cc" 'org-capture)
@@ -21,8 +24,7 @@
         ("o" "Reading Oceanbase" entry (file "~/documents/reading/oceanbase.org")
          "* %?\n [[%l][follow]] -- [%U]\n  %i")
         ("c" "consumption" table-line (file consumption-filename))
-        ("l" "Reading SQLite" entry (file "~/documents/reading/sqlite.org")
-         "* %?\n [[%l][follow]] -- [%U]\n  %i")))
+        ("l" "Interesting Reading Links" item (file interesting-links-filename))))
 
 (provide 'init-org-capture)
 
