@@ -12,7 +12,8 @@
 (defvar sydi/homepage-p nil "Indicate whether the page is home page")
 (defvar sydi/single-p t "Indicate whether a single post page or not")
 
-(defvar sydi/atom-exclude-file-list '("douban\\.org$" "^personal") "exclude files exporting to atom file")
+(defvar sydi/atom-exclude-file-list '("douban\\.org$" "^personal" "index\\.org$")
+  "exclude files exporting to atom file")
 (defvar sydi/atom-max-export-files-num 10 "max files to export")
 
 (require 'ox)
@@ -337,7 +338,7 @@ Default for SITEMAP-FILENAME is 'sitemap.org'."
     (let* ((org-export-allow-BIND t)
            (org-files (subseq (sydi/get-sorted-org-files root-dir) 0 sydi/atom-max-export-files-num))
            (atom-filename atom-file)
-                      (visiting (find-buffer-visiting atom-filename))
+           (visiting (find-buffer-visiting atom-filename))
            (atom-buffer (or visiting (find-file atom-filename)))
            (title "MiScratch")
            (subtitle "About Linux, Distributed System, Data Base, High Performance System")
@@ -438,27 +439,21 @@ If #+date keyword is not set and `other' equals to \"modify\", return the file s
 (require 'find-lisp)
 (defun sydi/get-sorted-org-files (root-dir)
   "return a sorted org files list"
-  (let ((org-files (remove-if
+  (let* ((org-files (remove-if
                     (lambda (ele) (member-if
                                    (lambda (match-reg) (string-match-p match-reg (file-name-nondirectory ele)))
                                    sydi/atom-exclude-file-list))
                     (find-lisp-find-files root-dir "\\.org$")))
-        (org-alist))
-    (mapc
-     (lambda (file)
-       (set 'org-alist (cons
-                        (cons file (sydi/get-org-file-date file))
-                        org-alist)))
-     org-files)
-    (mapcar 'car
-            (sort org-alist
-                  (lambda (a b)
-                    (let* ((adate (sydi/get-org-file-date (car a)))
-                           (bdate (sydi/get-org-file-date (car b)))
-                           (A (+ (lsh (car adate) 16) (cadr adate)))
-                           (B (+ (lsh (car bdate) 16) (cadr bdate))))
-                      (>= A B)))))
-    org-files))
+         (org-alist (mapcar (lambda (file) (cons file (sydi/get-org-file-date file))) org-files))
+         (sorted-files (mapcar 'car
+                               (sort org-alist
+                                     (lambda (a b)
+                                       (let* ((adate (sydi/get-org-file-date (car a)))
+                                              (bdate (sydi/get-org-file-date (car b)))
+                                              (A (+ (lsh (car adate) 16) (cadr adate)))
+                                              (B (+ (lsh (car bdate) 16) (cadr bdate))))
+                                         (>= A B)))))))
+    sorted-files))
 
 ;;; for sitemap.xml
 (defun sydi/all-urls (root-dir prefix)
