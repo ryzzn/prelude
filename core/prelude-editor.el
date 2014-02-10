@@ -394,6 +394,11 @@ indent yanked text (with prefix arg don't indent)."
 ;; enable winner-mode to manage window configurations
 (winner-mode +1)
 
+(global-set-key (kbd "M-g t") 'beginning-of-buffer)
+(global-set-key (kbd "M-g M-t") 'beginning-of-buffer)
+(global-set-key (kbd "M-g b") 'end-of-buffer)
+(global-set-key (kbd "M-g M-b") 'end-of-buffer)
+
 (provide 'prelude-editor)
 
 ;;; prelude-editor.el ends here
