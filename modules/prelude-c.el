@@ -57,7 +57,7 @@
             ;;no errors, make the compilation window go away in 0.5 seconds
             (when (string-match "*compilation*" (buffer-name buf))
               ;; @see http://emacswiki.org/emacs/ModeCompile#toc2
-              (bury-buffer "*compilation*")
+              (bury-buffer buf)
               (winner-undo)
               (message "NO COMPILATION ERRORS!")
               ))))

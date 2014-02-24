@@ -20,12 +20,12 @@
        (setq word-wrap t))
 
      ;; http://capitaomorte.github.com/yasnippet/faq.html
-     (add-hook 'org-mode-hook
-               (let ((original-command (lookup-key org-mode-map [tab])))
-                 `(lambda ()
-                    (setq yas/fallback-behavior
-                          '(apply ,original-command))
-                    (local-set-key [tab] 'yas/expand))))
+     ;; (add-hook 'org-mode-hook
+     ;;           (let ((original-command (lookup-key org-mode-map [tab])))
+     ;;             `(lambda ()
+     ;;                (setq yas/fallback-behavior
+     ;;                      '(apply ,original-command))
+     ;;                (local-set-key [tab] 'yas/expand))))
 
      ;; Various preferences
      (setq org-log-done t
