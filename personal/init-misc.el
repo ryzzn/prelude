@@ -3,7 +3,7 @@
 (require 'easy-utils)
 
 (add-auto-mode 'mail-mode "/mutt-sydi-[-0-9]+$")
-(setq user-full-name "Yudi Shi")
+(setq user-full-name "Shi Yudi")
 (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
 
                                         ;show ascii table
