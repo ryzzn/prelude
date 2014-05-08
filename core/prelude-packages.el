@@ -53,7 +53,7 @@
     smartparens smex undo-tree
     volatile-highlights zenburn-theme yasnippet
     dropdown-list org org-journal ox-reveal org-plus-contrib org-fstree
-    ggtags header2 sunrise-commander sunrise-x-buttons sunrise-x-popviewer
+    ggtags header2 sunrise-commander sunrise-x-popviewer
     htmlize)
   "A list of packages to ensure are installed at launch.")
 

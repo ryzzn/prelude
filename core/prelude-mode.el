@@ -60,7 +60,7 @@
     (define-key map (kbd "C-c r") 'prelude-rename-file-and-buffer)
     (define-key map (kbd "C-c t") 'prelude-visit-term-buffer)
     (define-key map (kbd "C-c k") 'prelude-kill-other-buffers)
-    (define-key map (kbd "C-c TAB") 'prelude-indent-rigidly-and-copy-to-clipboard)
+    ; (define-key map (kbd "C-c TAB") 'prelude-indent-rigidly-and-copy-to-clipboard)
     (define-key map (kbd "C-c h") 'helm-prelude)
     (define-key map (kbd "C-c +") 'prelude-increment-integer-at-point)
     (define-key map (kbd "C-c -") 'prelude-decrement-integer-at-point)
