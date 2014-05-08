@@ -6,11 +6,11 @@
 (define-key global-map "\C-cd" 'sr-popviewer-setup-windows)
 
 ; @see http://www.emacswiki.org/emacs/Sunrise_Commander_Tips#ReplaceDiredWithSunrise
-(setq find-directory-functions (cons 'sr-dired find-directory-functions))
+; (setq find-directory-functions (cons 'sr-dired find-directory-functions))
 
 (eval-after-load 'sunrise-commander
   '(progn
-     (require 'sunrise-x-buttons)
+     ; (require 'sunrise-x-buttons)
      (require 'sunrise-x-popviewer)
 
      ; Highlighting files with inappropriate permissions.
@@ -27,4 +27,5 @@
      (setq sr-popviewer-select-viewer-action
            (lambda nil (let ((sr-running nil)) (other-window 1))))
      ))
+
 (provide 'init-sunrise-commander)
