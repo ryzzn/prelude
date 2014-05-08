@@ -18,3 +18,8 @@
       (setq i (+ i 1))
       (insert (format "%4d %c\n" i i))))
   (goto-char (point-min)))
+
+(setq compilation-scroll-output t)
+
+(provide 'init-misc)
+;;; init-misc.el ends here
