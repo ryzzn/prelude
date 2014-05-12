@@ -21,5 +21,10 @@
 
 (setq compilation-scroll-output t)
 
+;; http://stackoverflow.com/a/13407502/3627264
+(add-hook 'sql-mode-hook
+          (lambda ()
+            (sql-highlight-mysql-keywords)))
+
 (provide 'init-misc)
 ;;; init-misc.el ends here
