@@ -1,3 +1,51 @@
+;;; init-org-html.el ---
+;;
+;; Filename: init-org-html.el
+;; Description:
+;; Author: Shi Yudi
+;; Maintainer:
+;; Created: 2014-07-18T18:51:07+0800
+;; Version:
+;; Package-Requires: ()
+;; Last-Updated:
+;;           By:
+;;     Update #: 6
+;; URL:
+;; Doc URL:
+;; Keywords:
+;; Compatibility:
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;;; Commentary:
+;;
+;;
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;;; Change Log:
+;;
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; This program is free software; you can redistribute it and/or
+;; modify it under the terms of the GNU General Public License as
+;; published by the Free Software Foundation; either version 3, or
+;; (at your option) any later version.
+;;
+;; This program is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+;; General Public License for more details.
+;;
+;; You should have received a copy of the GNU General Public License
+;; along with this program; see the file COPYING.  If not, write to
+;; the Free Software Foundation, Inc., 51 Franklin Street, Fifth
+;; Floor, Boston, MA 02110-1301, USA.
+;;
+
+;;; Code:
+
 (defvar sydi/base-directory "~/sydi.org/org/"
   "base org files directory")
 (defvar sydi/base-code-directory "~/sydi.org/html/code/")
@@ -7,6 +55,16 @@
 (defvar sydi/site-url "http://sydi.org/")
 (defvar sydi/google-id "112098239943590093765")
 (defvar sydi/site-name "MiScratch")
+(defvar sydi/google-tracker "<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-34738984-1', 'auto');
+  ga('send', 'pageview');
+
+</script>")
 
 (defvar sydi/comment-box-p t "Should add commnet box for this page")
 (defvar sydi/homepage-p nil "Indicate whether the page is home page")
@@ -15,6 +73,9 @@
 (defvar sydi/atom-exclude-file-list '("douban\\.org$" "^personal" "index\\.org$")
   "exclude files exporting to atom file")
 (defvar sydi/atom-max-export-files-num 10 "max files to export")
+(defvar sydi/exclude-pattern ".*my-wife.*\.org" "exclude files pattern to export")
+(defvar sydi/include-pattern nil "include files pattern to export")
+(defvar sydi/auto-sitemap t "generate sitemap")
 
 (require 'ox)
 
@@ -66,9 +127,10 @@
       (insert-file-contents filePath t)
       (buffer-string)))
   (let ((content-no-script)
-        (script ""))
+        (script "")
+        (google-tracker sydi/google-tracker))
     ;; extract javascript
-    (if (not (string-match "<script.*>\\(.\\|\n\\)*</script>" contents))
+    (if (not (string-match "<script[^>]*>\\(.\\|\n\\)*</script>" contents))
         (setq content-no-script contents)
       (setq script (match-string-no-properties 0 contents))
       (setq content-no-script (concat (substring contents 0 (match-beginning 0))
@@ -116,6 +178,7 @@
 %s
 </head>
 <body>
+%s
 <div id=\"wrapper\">
   <div id=\"sidebar\">%s</div>
   <div id=\"main\">
@@ -127,7 +190,7 @@
           <div class=\"feature-image\"></div>
           <div class=\"the-content\">
             <!-- content -->
-           %s
+            %s
             <!-- comment box -->
             %s
           </div>
@@ -152,6 +215,7 @@
                       keywords
                       style
                       head
+                      google-tracker
                       sidebar-html
                       header
                       content-no-script
@@ -249,7 +313,7 @@ Default for SITEMAP-FILENAME is 'sitemap.org'."
            :components ("sydi-pages" "sydi-static"))
           ("sydi-static"
            :base-directory "~/sydi.org/org/"
-           :base-extension "xml\\|css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf\\|html\\|div\\|pl\\|template\\|txt"
+           :base-extension "xml\\|css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf\\|html\\|div\\|pl\\|template\\|txt\\|woff\\|eot"
            :publishing-directory "~/sydi.org/html"
            :recursive t
            :publishing-function org-publish-attachment)
@@ -263,23 +327,24 @@ Default for SITEMAP-FILENAME is 'sitemap.org'."
               :publishing-function (org-rss-publish-to-rss)
               :section-numbers nil
               :exclude ".*"            ;; To exclude all files...
-              :include ("index.xml")   ;; ... except index.org.
+              :include ("index.org")   ;; ... except index.org.
               :table-of-contents nil)
           ("sydi-pages"
            :base-directory ,sydi/base-directory
            :base-extension "org"
+           :exclude ,sydi/exclude-pattern
+           :include ,sydi/include-pattern
            :publishing-directory ,sydi/publish-directory
            :html-extension "html"
            :recursive t
            :makeindex nil
-           :auto-sitemap t
+           :auto-sitemap ,sydi/auto-sitemap
            :sitemap-ignore-case t
            :sitemap-filename "sitemap.org"
            :sitemap-function sydi/publish-org-sitemap
            :htmlized-source t
            :with-toc nil
            :auto-preamble t
-           :exclude ".*my-wife.*\.org"
            :sitemap-title "站点地图 for 本网站"
            :author "施宇迪"
            :email "a@sydi.org"
@@ -289,24 +354,33 @@ Default for SITEMAP-FILENAME is 'sitemap.org'."
 <link href=\"/images/logo.png\" rel=\"icon\" type=\"image/x-icon\" />
 <link href=\"/atom.xml\" type=\"application/atom+xml\" rel=\"alternate\" title=\"sydi.org atom\" />
 "
-           :js-style "<script type=\"text/javascript\" src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js\"></script>
+           :js-style "<script type=\"text/javascript\" src=\"/js/jquery.min.js\"></script>
 <script type=\"text/javascript\" src=\"/js/site.js\"></script>
 "
            :publishing-function (org-html-publish-to-html org-org-publish-to-org)
            :body-only t
            :completion-function (sydi/sync-server)))))
 
-(defun sydi/publish ()
+(defun sydi/publish (&optional proj)
   "Publish Worg in htmlized pages."
   (interactive)
   (let ((org-format-latex-signal-error nil)
         (org-startup-folded nil)
-        (org-export-date-timestamp-format "%Y-%m-%d"))
+        (org-export-date-timestamp-format "%Y-%m-%d")
+        (proj (or proj "sydi")))
     (set-org-publish-project-alist)
     (message "Emacs %s" emacs-version)
     (org-version)
-    (sydi/generate-sitemap)
-    (org-publish-project "sydi")))
+    (if sydi/auto-sitemap (sydi/generate-sitemap))
+    (org-publish-project proj)))
+
+(defun sydi/publish-current ()
+  "Publish current org file"
+  (interactive)
+  (let ((sydi/exclude-pattern ".*")
+        (sydi/include-pattern (list (file-relative-name buffer-file-name sydi/base-directory)))
+        (sydi/auto-sitemap nil))
+    (sydi/publish "sydi-pages")))
 
 ;; external browser should be chromium
 (setq browse-url-generic-program
@@ -493,3 +567,4 @@ If #+date keyword is not set and `other' equals to \"modify\", return the file s
   (sydi/generate-sitemap-ex "sitemap.xml" "/home/ryan/sydi.org/org/" "http://sydi.org/"))
 
 (provide 'init-org-html)
+;;; init-org-html.el ends here
