@@ -13,10 +13,12 @@
 (define-key global-map "\C-cc" 'org-capture)
 
 (setq org-capture-templates
-      '(("t" "Todo" entry (file+headline "~/org/gtd.org" "Tasks")
-         "* TODO %?\n  %i\n  %a")
-        ("w" "Work Journal" entry (file+datetree "~/org/work_journal.org")
-         "* %?\nEntered on %U\n  %i\n")
+      '(("t" "Todo" entry (file+headline "~/personal/org/notes.org" "Tasks")
+         "* TODO %?\n%i\n%a")
+        ("w" "Work Journal" entry (file+headline "~/personal/org/notes.org" "Work journal")
+         "* %?\nEntered on %U")
+        ("n" "Notes" entry (file+headline "~/personal/org/notes.org" "Notes")
+         "* %?\nEntered on %U")
         ("j" "Web Journal" entry (file "~/sydi.org/org/journal.org")
          "* %U\n%?%i" :prepend t)
         ("s" "OceanBase Senses" entry (file "~/sydi.org/org/oceanbase/senses.org")

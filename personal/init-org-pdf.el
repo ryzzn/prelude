@@ -39,7 +39,7 @@
              '("cn-article"
                "\\documentclass[12pt,a4paper]{article}
 \\usepackage{graphicx}
-\\usepackage{xcolor}
+\\usepackage{color}
 \\usepackage{xeCJK}
 \\usepackage{lmodern}
 \\usepackage{verbatim}
@@ -105,7 +105,7 @@ marginparsep=7pt, marginparwidth=.6in}
              '("org-article"
                "\\documentclass{org-article}
 \\usepackage{graphicx}
-\\usepackage{xcolor}
+\\usepackage{color}
 \\usepackage{xeCJK}
 \\usepackage{lmodern}
 \\usepackage{verbatim}
@@ -125,6 +125,7 @@ marginparsep=7pt, marginparwidth=.6in}
 \\usepackage{natbib}
 \\usepackage{fancyhdr}
 \\usepackage{fontspec,xunicode,xltxtra}
+\\usepackage{minted}
 \\setCJKmainfont[Scale=0.9]{文泉驿正黑}%中文字体
 \\setCJKmonofont[Scale=0.9]{文泉驿等宽正黑}
 \\fancyfoot[C]{\\bfseries\\thepage}
@@ -207,7 +208,9 @@ style=\"text-decoration:underline;\">" "</span>")
                                         ("@" "\\alert{%s}" nil)))
       )
 (setq org-latex-listings 'minted)
-(add-to-list 'org-latex-packages-alist '("" "minted"))
+(setq org-latex-minted-options
+      '(("bgcolor" "bg") ("linenos" "false")))
+
 (setq org-latex-default-packages-alist
       '(("" "fixltx2e" nil)
         ("" "graphicx" t)
@@ -223,10 +226,10 @@ style=\"text-decoration:underline;\">" "</span>")
         ("" "hyperref" nil)
         ("" "zhfontcfg" nil)
         ("" "listings" nil)
-        ("" "minted" nil)
         ("AUTO" "inputenc" t)
         ;; ("" "verbatim" nil)
         "\\tolerance=1000"))
+
 
 (setq ps-paper-type 'a4
       ps-font-size 16.0
