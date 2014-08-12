@@ -73,6 +73,7 @@
   ;; (setq lazy-lock-defer-time 0)
 
   (ggtags-mode 1)
+  (setq ggtags-enable-navigation-keys nil)
 
   (require 'oceanbase-style)
   (setq comment-start "/* ")
