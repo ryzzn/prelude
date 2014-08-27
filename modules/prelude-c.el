@@ -41,7 +41,7 @@
   (local-set-key (kbd "C-x C-o") 'ff-find-other-file)
   (local-set-key "\M-f" 'c-forward-into-nomenclature)
   (local-set-key "\M-b" 'c-backward-into-nomenclature)
-  (setq cc-search-directories '("." "/usr/include" "/usr/local/include/*" "../*/include" "$WXWIN/include"))
+  (setq cc-search-directories '("." ".." "/usr/include" "/usr/local/include/*"))
   (setq c-style-variables-are-local-p nil) ;give me NO newline
                                         ;automatically after electric
                                         ;expressions are entered
