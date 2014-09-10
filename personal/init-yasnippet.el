@@ -2,8 +2,6 @@
 
 ;; default TAB key is occupied by auto-complete
 (global-set-key (kbd "C-c k") 'yas-expand)
-;; default hotkey `C-c C-s` is still valid
-(global-set-key (kbd "C-c l") 'yas-insert-snippet)
 (add-hook 'yas-after-exit-snippet-hook
           '(lambda ()
              (indent-region yas-snippet-beg yas-snippet-end)))
