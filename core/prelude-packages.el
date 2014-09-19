@@ -80,8 +80,8 @@
     zenburn-theme
     yasnippet
     dropdown-list org org-journal ox-reveal org-plus-contrib org-fstree
-    ggtags header2 sunrise-commander sunrise-x-buttons sunrise-x-popviewer
-    htmliz)
+    ggtags header2 sunrise-commander sunrise-x-popviewer
+    htmlize color-theme-sanityinc-solarized)
   "A list of packages to ensure are installed at launch.")
 
 (defun prelude-packages-installed-p ()
