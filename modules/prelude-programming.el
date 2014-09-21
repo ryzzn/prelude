@@ -32,7 +32,7 @@
 
 ;;; Code:
 
-(prelude-require-packages '(guru-mode))
+(prelude-require-packages '(guru-mode smartparens))
 
 (defun prelude-local-comment-auto-fill ()
   (set (make-local-variable 'comment-auto-fill-only-comments) t))
@@ -60,6 +60,7 @@ This functions should be added to the hooks of major modes for programming."
 ;; (the final optional t sets the *append* argument)
 
 ;; smart curly braces
+(require 'smartparens)
 (sp-pair "{" nil :post-handlers
          '(((lambda (&rest _ignored)
               (prelude-smart-open-line-above)) "RET")))
