@@ -45,16 +45,43 @@
 (package-initialize)
 
 (defvar prelude-packages
-  '(ace-jump-mode ack-and-a-half anzu dash diminish elisp-slime-nav
-    epl expand-region flx-ido flycheck gist
-    gitconfig-mode gitignore-mode grizzl
-    guru-mode projectile ido-ubiquitous
-    magit move-text rainbow-mode
-    smartparens smex undo-tree
-    volatile-highlights zenburn-theme yasnippet
+  '(ace-jump-mode
+    ace-jump-buffer
+    ace-window
+    ack-and-a-half
+    anzu
+    browse-kill-ring
+    dash
+    discover-my-major
+    diff-hl
+    diminish
+    easy-kill
+    elisp-slime-nav
+    epl
+    expand-region
+    flycheck
+    gist
+    git-timemachine
+    gitconfig-mode
+    gitignore-mode
+    god-mode
+    grizzl
+    guru-mode
+    ov
+    projectile
+    magit
+    move-text
+    operate-on-number
+    rainbow-mode
+    smartparens
+    smartrep
+    undo-tree
+    volatile-highlights
+    zenburn-theme
+    yasnippet
     dropdown-list org org-journal ox-reveal org-plus-contrib org-fstree
     ggtags header2 sunrise-commander sunrise-x-popviewer
-    htmlize)
+    htmlize color-theme-sanityinc-solarized)
   "A list of packages to ensure are installed at launch.")
 
 (defun prelude-packages-installed-p ()
@@ -73,7 +100,7 @@
 Missing packages are installed automatically."
   (mapc #'prelude-require-package packages))
 
-(defalias 'prelude-ensure-module-deps 'prelude-require-packages)
+(define-obsolete-function-alias 'prelude-ensure-module-deps 'prelude-require-packages)
 
 (defun prelude-install-packages ()
   "Install all packages listed in `prelude-packages'."
@@ -114,6 +141,9 @@ PACKAGE is installed only if not already present.  The file is opened in MODE."
     ("\\.csv\\'" csv-mode csv-mode)
     ("\\.d\\'" d-mode d-mode)
     ("\\.dart\\'" dart-mode dart-mode)
+    ("\\.ex\\'" elixir-mode elixir-mode)
+    ("\\.exs\\'" elixir-mode elixir-mode)
+    ("\\.elixir\\'" elixir-mode elixir-mode)
     ("\\.erl\\'" erlang erlang-mode)
     ("\\.feature\\'" feature-mode feature-mode)
     ("\\.go\\'" go-mode go-mode)
@@ -129,12 +159,16 @@ PACKAGE is installed only if not already present.  The file is opened in MODE."
     ("\\.pp\\'" puppet-mode puppet-mode)
     ("\\.php\\'" php-mode php-mode)
     ("PKGBUILD\\'" pkgbuild-mode pkgbuild-mode)
+    ("\\.rs\\'" rust-mode rust-mode)
     ("\\.sass\\'" sass-mode sass-mode)
     ("\\.scala\\'" scala-mode2 scala-mode)
     ("\\.scss\\'" scss-mode scss-mode)
     ("\\.slim\\'" slim-mode slim-mode)
+    ("\\.swift\\'" swift-mode swift-mode)
     ("\\.textile\\'" textile-mode textile-mode)
-    ("\\.yml\\'" yaml-mode yaml-mode)))
+    ("\\.yml\\'" yaml-mode yaml-mode)
+    ("\\.yaml\\'" yaml-mode yaml-mode)
+    ("Dockerfile\\'" dockerfile-mode dockerfile-mode)))
 
 ;; markdown-mode doesn't have autoloads for the auto-mode-alist
 ;; so we add them manually if it's already installed
