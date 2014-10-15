@@ -26,5 +26,10 @@
           (lambda ()
             (sql-highlight-mysql-keywords)))
 
+;; Transparent background for emacs when using in terminal
+;; (custom-set-faces
+;;  '(default ((t (:background "unspecified" :foreground "#b3c4c6")))))
+
+
 (provide 'init-misc)
 ;;; init-misc.el ends here

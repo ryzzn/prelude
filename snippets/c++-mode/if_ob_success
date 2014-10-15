@@ -1,0 +1,8 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: if_ob_success
+# key: ifs
+# binding: direct-keybinding
+# --
+if (OB_SUCCESS == ret) {
+  $0
+}

@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: fori
+# key: fori
+# --
+for (int64_t ${1:i} = ${2:0}; OB_SUCCESS == ret && i < $3; ++$1) {
+  $0
+}
