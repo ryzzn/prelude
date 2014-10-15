@@ -76,11 +76,11 @@
 (setq tab-always-indent 'complete)
 
 ;; smart pairing for all
-;; (require 'smartparens-config)
-;; (setq sp-base-key-bindings 'paredit)
-;; (setq sp-autoskip-closing-pair 'always)
-;; (setq sp-hybrid-kill-entire-symbol nil)
-;; (sp-use-paredit-bindings)
+(require 'smartparens-config)
+(setq sp-base-key-bindings 'paredit)
+(setq sp-autoskip-closing-pair 'always)
+(setq sp-hybrid-kill-entire-symbol nil)
+(sp-use-paredit-bindings)
 
 ;; (show-smartparens-global-mode +1)
 
@@ -190,9 +190,9 @@ The body of the advice is in BODY."
 (diminish 'volatile-highlights-mode)
 
 ;; tramp, for sudo access
-;; (require 'tramp)
+(require 'tramp)
 ;; keep in mind known issues with zsh - see emacs wiki
-;; (setq tramp-default-method "ssh")
+(setq tramp-default-method "ssh")
 
 ;; ido-mode
 (require 'ido)
