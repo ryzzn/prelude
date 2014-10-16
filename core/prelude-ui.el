@@ -74,7 +74,7 @@
                                           "%b"))))
 
 ;; use zenburn as the default theme
-(load-theme 'sanityinc-solarized-dark t)
+(load-theme 'zenburn t)
 
 
 (provide 'prelude-ui)
