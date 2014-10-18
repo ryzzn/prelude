@@ -73,11 +73,11 @@
                                             (abbreviate-file-name (buffer-file-name))
                                           "%b"))))
 
-(set-frame-font "DejaVu Sans Mono 10")
+;; set default frame font
+(add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono 10"))
 
 ;; use zenburn as the default theme
 (load-theme prelude-theme t)
-
 
 (provide 'prelude-ui)
 ;;; prelude-ui.el ends here
