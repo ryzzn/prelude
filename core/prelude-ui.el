@@ -73,8 +73,10 @@
                                             (abbreviate-file-name (buffer-file-name))
                                           "%b"))))
 
+(set-frame-font "DejaVu Sans Mono 10")
+
 ;; use zenburn as the default theme
-(load-theme 'sanityinc-solarized-dark t)
+;; (load-theme 'hc-zenburn t)
 
 
 (provide 'prelude-ui)
