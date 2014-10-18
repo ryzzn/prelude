@@ -39,6 +39,7 @@
              '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
 (add-to-list 'package-archives '("SC" . "http://joseito.republika.pl/sunrise-commander/") t)
+(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 
 ;; set package-user-dir to be relative to Prelude install path
 (setq package-user-dir (expand-file-name "elpa" prelude-dir))
@@ -166,6 +167,7 @@ PACKAGE is installed only if not already present.  The file is opened in MODE."
     ("\\.slim\\'" slim-mode slim-mode)
     ("\\.swift\\'" swift-mode swift-mode)
     ("\\.textile\\'" textile-mode textile-mode)
+    ("\\.thrift\\'" thrift thrift-mode)
     ("\\.yml\\'" yaml-mode yaml-mode)
     ("\\.yaml\\'" yaml-mode yaml-mode)
     ("Dockerfile\\'" dockerfile-mode dockerfile-mode)))

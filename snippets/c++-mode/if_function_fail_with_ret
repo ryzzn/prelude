@@ -1,0 +1,8 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: if_function_fail_with_ret
+# key: ifff
+# binding: direct-keybinding
+# --
+if (OB_SUCCESS != (ret = $1($2))) {
+  $0
+}

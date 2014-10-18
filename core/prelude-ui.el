@@ -76,7 +76,7 @@
 (set-frame-font "DejaVu Sans Mono 10")
 
 ;; use zenburn as the default theme
-;; (load-theme 'hc-zenburn t)
+(load-theme prelude-theme t)
 
 
 (provide 'prelude-ui)
