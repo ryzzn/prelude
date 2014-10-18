@@ -385,6 +385,21 @@ indent yanked text (with prefix arg don't indent)."
                                         ; error
       )
 
+;; @see http://xugx2007.blogspot.com.au/2007/06/benjamin-rutts-emacs-c-development-tips.html
+(setq compilation-window-height 8)
+(add-hook 'compilation-finish-functions
+      (lambda (buf str)
+        (if (string-match "exited abnormally" str)
+            ;;there were errors
+            (message "compilation errors, press C-x ` to visit")
+          ;;no errors, make the compilation window go away in 0.5 seconds
+          (when (string-match "*compilation*" (buffer-name buf))
+            ;; @see http://emacswiki.org/emacs/ModeCompile#toc2
+            (bury-buffer buf)
+            (winner-undo)
+            (message "NO COMPILATION ERRORS!")
+            ))))
+
 ;; Colorize output of Compilation Mode, see
 ;; http://stackoverflow.com/a/3072831/355252
 (require 'ansi-color)
