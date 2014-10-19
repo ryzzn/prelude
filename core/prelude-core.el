@@ -66,6 +66,12 @@ With a prefix ARG always prompt for command to use."
                                 (ansi-term (getenv "SHELL")))
                               "*ansi-term*"))
 
+(defun prelude-visit-eshell-buffer ()
+  "Create or visit a eshell terminal buffer."
+  (interactive)
+  (prelude-start-or-switch-to 'eshell
+                              "*eshell*"))
+
 (defun prelude-search (query-url prompt)
   "Open the search url constructed with the QUERY-URL.
 PROMPT sets the `read-string prompt."
@@ -77,7 +83,7 @@ PROMPT sets the `read-string prompt."
               (read-string prompt))))))
 
 (defmacro prelude-install-search-engine (search-engine-name search-engine-url search-engine-prompt)
-  "Given some information regarding a search engine, install the interactive command to search through them"
+  "Given some information regarding a search engine, install the interactive command to search through them."
   `(defun ,(intern (format "prelude-%s" search-engine-name)) ()
        ,(format "Search %s with a query or region if any." search-engine-name)
        (interactive)
