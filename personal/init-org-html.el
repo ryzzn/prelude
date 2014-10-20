@@ -9,7 +9,7 @@
 ;; Package-Requires: ()
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 6
+;;     Update #: 12
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -136,11 +136,11 @@
       (setq content-no-script (concat (substring contents 0 (match-beginning 0))
                                         (substring contents (match-end 0)))))
     ;; format html contents
-    (let* ((title (plist-get info :title))
+    (let* ((title (org-element-interpret-data (plist-get info :title)))
            (email (plist-get info :email))
-           (author (plist-get info :author))
+           (author (org-element-interpret-data (plist-get info :author)))
            (body-only (plist-get info :body-only))
-           (date (plist-get info :date))
+           (date (org-element-interpret-data (plist-get info :date)))
            (language    (plist-get info :language))
            (keywords    (plist-get info :keywords))
            (description (plist-get info :description))
@@ -169,7 +169,7 @@
 <title>%s</title>
 <meta http-equiv=\"Content-Type\" content=\"text/html;charset=%s\"/>
 <meta name=\"title\" content=\"%s\"/>
-<meta name=\"generator\" content=\"Org-mode modify by Yudi Shi\"/>
+<meta name=\"generator\" content=\"Org-mode modified by ryzn\"/>
 <meta name=\"generated\" content=\"%s\"/>
 <meta name=\"author\" content=\"%s\"/>
 <meta name=\"description\" content=\"%s\"/>

@@ -40,7 +40,6 @@
                "\\documentclass[12pt,a4paper]{article}
 \\usepackage{graphicx}
 \\usepackage{color}
-\\usepackage{xeCJK}
 \\usepackage{lmodern}
 \\usepackage{verbatim}
 \\usepackage{fixltx2e}
@@ -57,23 +56,11 @@
 \\usepackage{wasysym}
 \\usepackage{latexsym}
 \\usepackage{natbib}
+\\usepackage{zhfontcfg}
 \\usepackage{fancyhdr}
-\\usepackage[xetex,colorlinks=true,CJKbookmarks=true,
-linkcolor=blue,
-urlcolor=blue,
-menucolor=blue]{hyperref}
-\\usepackage{fontspec,xunicode,xltxtra}
-\\setmainfont[BoldFont=Adobe Heiti Std]{文泉驿正黑}
-\\setsansfont[BoldFont=Adobe Heiti Std]{文泉驿正黑}
-\\setmonofont{Monaco}
-\\newcommand\\fontnamemono{Monaco}%等宽字体
-\\newfontinstance\\MONO{\\fontnamemono}
-\\newcommand{\\mono}[1]{{\\MONO #1}}
-\\setCJKmainfont[Scale=0.9]{文泉驿正黑}%中文字体
-\\setCJKmonofont[Scale=0.9]{文泉驿等宽正黑}
+\\usepackage[xetex,colorlinks=true,CJKbookmarks=true,linkcolor=blue,urlcolor=blue,menucolor=blue]{hyperref}
 \\hypersetup{unicode=true}
-\\geometry{a4paper, textwidth=6.5in, textheight=10in,
-marginparsep=7pt, marginparwidth=.6in}
+\\geometry{a4paper, textwidth=6.5in, textheight=10in,marginparsep=7pt, marginparwidth=.6in}
 \\definecolor{foreground}{RGB}{220,220,204}%浅灰
 \\definecolor{background}{RGB}{62,62,62}%浅黑
 \\definecolor{preprocess}{RGB}{250,187,249}%浅紫
@@ -88,11 +75,11 @@ marginparsep=7pt, marginparwidth=.6in}
 \\definecolor{constant}{RGB}{220,162,170}%粉红
 \\definecolor{buildin}{RGB}{127,159,127}%深铅绿
 \\punctstyle{kaiming}
-\\title{}
+\\pagestyle{fancy}
 \\fancyfoot[C]{\\bfseries\\thepage}
 \\chead{\\MakeUppercase\\sectionmark}
-\\pagestyle{fancy}
 \\tolerance=1000
+\\renewcommand{\\contentsname}{目录}
 [NO-DEFAULT-PACKAGES]
 [NO-PACKAGES]"
 ("\\section{%s}" . "\\section*{%s}")
@@ -106,7 +93,6 @@ marginparsep=7pt, marginparwidth=.6in}
                "\\documentclass{org-article}
 \\usepackage{graphicx}
 \\usepackage{color}
-\\usepackage{xeCJK}
 \\usepackage{lmodern}
 \\usepackage{verbatim}
 \\usepackage{fixltx2e}
