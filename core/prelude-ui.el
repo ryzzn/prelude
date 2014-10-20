@@ -76,6 +76,12 @@
 ;; set default frame font
 (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono 10"))
 
+;; make background opaque in terminal emacs
+(add-to-list 'after-make-frame-functions
+             (lambda ()
+               (if (eq window-system nil)
+                   (set-frame-parameter nil 'background-color "unspecified"))))
+
 ;; use zenburn as the default theme
 (load-theme prelude-theme t)
 
