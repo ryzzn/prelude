@@ -89,16 +89,17 @@
                              'c-lineup-assignments)
                           ++))
                         (label . 0)
-                        (case-label . 0)
+                        (case-label . +)
                         (statement-case-open . +)
                         (statement-case-intro . +) ; case w/o {
-                        (access-label . 0)
+                        (access-label . -)
                         (innamespace . 0))))
   "The new OceanBase C/C++ Programming Style.")
 
 ;;;###autoload
 (defun new-oceanbase-style ()
   "Set `new-oceanbase-style' as your cpp programming style."
+  (interactive)
   (c-add-style "new-oceanbase" new-oceanbase-cpp-style t))
 
 (provide 'new-oceanbase-style)
