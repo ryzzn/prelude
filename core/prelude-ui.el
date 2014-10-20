@@ -78,9 +78,9 @@
 
 ;; make background opaque in terminal emacs
 (add-to-list 'after-make-frame-functions
-             (lambda ()
+             (lambda (frame)
                (if (eq window-system nil)
-                   (set-frame-parameter nil 'background-color "unspecified"))))
+                   (set-frame-parameter frame 'background-color "unspecified-bg"))))
 
 ;; use zenburn as the default theme
 (load-theme prelude-theme t)
