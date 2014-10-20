@@ -58,6 +58,8 @@
 \\usepackage{natbib}
 \\usepackage{zhfontcfg}
 \\usepackage{fancyhdr}
+\\usepackage{fontspec,xunicode,xltxtra}
+\\usepackage{minted}
 \\usepackage[xetex,colorlinks=true,CJKbookmarks=true,linkcolor=blue,urlcolor=blue,menucolor=blue]{hyperref}
 \\hypersetup{unicode=true}
 \\geometry{a4paper, textwidth=6.5in, textheight=10in,marginparsep=7pt, marginparwidth=.6in}
@@ -194,8 +196,6 @@ style=\"text-decoration:underline;\">" "</span>")
                                         ("@" "\\alert{%s}" nil)))
       )
 (setq org-latex-listings 'minted)
-(setq org-latex-minted-options
-      '(("bgcolor" "bg") ("linenos" "false")))
 
 (setq org-latex-default-packages-alist
       '(("" "fixltx2e" nil)
