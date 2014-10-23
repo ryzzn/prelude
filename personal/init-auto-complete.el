@@ -1,5 +1,7 @@
 ;; @see http://cx4a.org/software/auto-complete/manual.html
 (require 'auto-complete-config)
+(prelude-require-package 'auto-complete-clang)
+
 (global-auto-complete-mode t)
 (setq ac-expand-on-auto-complete t)
 (setq ac-auto-start t)
