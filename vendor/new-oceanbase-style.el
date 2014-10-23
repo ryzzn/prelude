@@ -77,7 +77,7 @@
                         (comment-intro . 0)
                         (arglist-close . c-lineup-arglist)
                         (topmost-intro . 0)
-                        (topmost-intro-cont . ++)
+                        (topmost-intro-cont . 0)
                         (block-open . 0)
                         (inline-open . 0)
                         (substatement-open . 0)
