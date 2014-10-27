@@ -61,6 +61,13 @@
   (local-set-key "\C-m" 'newline-and-indent)
   (local-set-key (kbd "RET") 'newline-and-indent)
 
+  (local-set-key (kbd "M-`") (lambda ()
+                               (interactive)
+                               (let ((default-directory
+                                       (file-name-directory (get-closest-pathname))))
+                                 (compile "make -j10"))))
+  (local-set-key (kbd "M-~") 'recompile)
+
   ;; @see https://github.com/seanfisk/cmake-flymake
   ;; make sure you project use cmake
   ;; (flymake-mode)
