@@ -378,11 +378,10 @@ indent yanked text (with prefix arg don't indent)."
       (ansi-color-apply-on-region (point-min) (point-max)))))
 
 (require 'compile)
-(setq compilation-ask-about-save nil  ; Just save before compiling
-      compilation-always-kill t       ; Just kill old compile processes before
-                                        ; starting the new one
-      compilation-scroll-output 'first-error ; Automatically scroll to first
-                                        ; error
+(setq compilation-ask-about-save nil         ; Just save before compiling
+      compilation-always-kill t              ; Just kill old compile processes before
+                                             ; starting the new one
+      compilation-scroll-output 'first-error ; Automatically scroll to first error
       )
 
 ;; @see http://xugx2007.blogspot.com.au/2007/06/benjamin-rutts-emacs-c-development-tips.html
@@ -393,10 +392,17 @@ indent yanked text (with prefix arg don't indent)."
             ;;there were errors
             (message "compilation errors, press C-x ` to visit")
           ;;no errors, make the compilation window go away in 0.5 seconds
-          (when (string-match "*compilation*" (buffer-name buf))
+          (when (and (string-match "*compilation*" (buffer-name buf)))
             ;; @see http://emacswiki.org/emacs/ModeCompile#toc2
             (bury-buffer buf)
-            (winner-undo)
+            ;; if no compile buffer before we invoke compile command
+            ;; then just undo the window, otherwise replace compile
+            ;; buffer with other buffer in this buffer.
+            (let ((window-conf (current-window-configuration)))
+              (winner-undo)
+              (when (get-buffer-window buf)
+                (set-window-configuration window-conf)
+                (replace-buffer-in-windows buf)))
             (message "NO COMPILATION ERRORS!")
             ))))
 
