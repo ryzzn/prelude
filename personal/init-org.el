@@ -3,9 +3,7 @@
 
 (eval-after-load 'org
   '(progn
-     (require 'org-exp)
      (require 'org-clock)
-     (require 'org-latex)
 
      (require 'org-checklist)
      (require 'org-fstree)
