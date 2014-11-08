@@ -30,6 +30,20 @@
 ;; (custom-set-faces
 ;;  '(default ((t (:background "unspecified" :foreground "#b3c4c6")))))
 
+(defun ryzn/toggle-proxy-proxy ()
+  (interactive)
+  (if (bound-and-true-p url-proxy-services)
+      (setq url-proxy-services nil)
+    (setq url-proxy-services
+          '(("no_proxy" . "^\\(localhost\\|10.*\\)")
+            ("http" . "sydi.org:3128")
+            ("https" . "sydi.org:3128")
+            )))
+  (message
+   (if (bound-and-true-p url-proxy-services)
+       "setting url proxy done!" "cancel url proxy done!"))
+  )
+
 
 (provide 'init-misc)
 ;;; init-misc.el ends here
