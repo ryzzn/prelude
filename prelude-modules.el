@@ -10,6 +10,7 @@
 ;; (require 'prelude-erlang)
 ;; (require 'prelude-haskell)
 (require 'prelude-helm-everywhere)
+(require 'prelude-auto-complete)
 (require 'prelude-js)
 ;; (require 'prelude-key-chord)
 ;; (require 'prelude-latex)
