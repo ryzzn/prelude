@@ -62,8 +62,12 @@
 (helm-descbinds-mode)
 (helm-mode 1)
 
+(setq
+ helm-ff-tramp-not-fancy nil            ; enable tramp color
+ )
+
 ;; enable Helm version of Projectile with replacment commands
 (helm-projectile-on)
 
 (provide 'prelude-helm-everywhere)
-;; prelude-helm-everywhere.el ends here.
+;;; prelude-helm-everywhere.el ends here
