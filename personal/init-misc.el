@@ -19,8 +19,6 @@
       (insert (format "%4d %c\n" i i))))
   (goto-char (point-min)))
 
-(setq compilation-scroll-output t)
-
 ;; http://stackoverflow.com/a/13407502/3627264
 (add-hook 'sql-mode-hook
           (lambda ()
