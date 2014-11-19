@@ -36,8 +36,8 @@
       (setq url-proxy-services nil)
     (setq url-proxy-services
           '(("no_proxy" . "^\\(localhost\\|10.*\\)")
-            ("http" . "sydi.org:3128")
-            ("https" . "sydi.org:3128")
+            ("http" . "sydi.org:3328")
+            ("https" . "sydi.org:3328")
             )))
   (message
    (if (bound-and-true-p url-proxy-services)
