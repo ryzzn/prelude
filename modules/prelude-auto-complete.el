@@ -57,7 +57,7 @@
   ; fixed rinari's bug
   (remove-hook 'find-file-hook 'rinari-launch)
 
-  (setq ac-clang-auto-save t)
+  ; (setq ac-clang-auto-save t)
   )
 
 (add-hook 'c-mode-common-hook 'my-ac-cc-mode-setup)
