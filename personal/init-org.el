@@ -3,9 +3,7 @@
 
 (eval-after-load 'org
   '(progn
-     (require 'org-exp)
      (require 'org-clock)
-     (require 'org-latex)
 
      (require 'org-checklist)
      (require 'org-fstree)
@@ -86,6 +84,7 @@
 (eval-after-load 'org
   '(progn
      (custom-set-variables
+      '(org-journal-dir "~/personal/org/journal")
       '(org-agenda-files (quote ("~/personal/todo.org" "~/personal/org/notes.org")))
       '(org-default-notes-file "~/personal/notes.org")
       '(org-agenda-span 7)

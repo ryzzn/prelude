@@ -35,6 +35,18 @@
 (require 'prelude-programming)
 (require 'new-oceanbase-style)
 
+(defun ryzn/get-real-builddir ()
+  "Get relative object path of source code directory.
+Default build directory is set as 'build'."
+  (interactive)
+  (let* ((src-topdir (file-name-directory (get-closest-pathname "configure.ac")))
+         (build-topdir (concat src-topdir "/build"))
+         (rel-curdir (file-relative-name (file-name-directory (get-closest-pathname "Makefile.am")) src-topdir))
+         (build-path (expand-file-name (concat build-topdir "/" rel-curdir))))
+    build-path
+    (message build-path)
+    ))
+
 ;; C/C++ SECTION
 (defun sydi/c++-mode-hook()
   ;; @see http://stackoverflow.com/questions/3509919/ \
@@ -61,8 +73,7 @@
 
   (local-set-key (kbd "M-`") (lambda ()
                                (interactive)
-                               (let ((default-directory
-                                       (file-name-directory (get-closest-pathname))))
+                               (let ((default-directory (ryzn/get-real-builddir)))
                                  (compile "make -j10"))))
   (local-set-key (kbd "M-~") 'recompile)
   (company-mode)
@@ -94,7 +105,6 @@
 (setq prelude-makefile-mode-hook 'prelude-makefile-mode-defaults)
 
 (add-hook 'makefile-mode-hook (lambda ()
-                                (run-hooks 'prelude-makefile-mode-hook)))
-(provide 'prelude-c)
+                                (run-hooks 'prelude-makefile-mode-hook))) (provide 'prelude-c)
 
 ;;; prelude-c.el ends here

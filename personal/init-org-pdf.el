@@ -1,15 +1,17 @@
 (add-hook 'org-mode-hook
           (lambda () (setq truncate-lines nil)))
+
 (require 'org-install)
-(require 'org-latex)
+(require 'ox-latex)
+(require 'ox-beamer)
 
 ;; 取消^和_字体上浮和下沉的特殊性
 (setq org-export-with-sub-superscripts nil)
 ;; 使用xelatex一步生成PDF
 (setq org-latex-pdf-process
-      '("xelatex -shell-escape -interaction nonstopmode %f"
-        "xelatex -shell-escape -interaction nonstopmode %f"
-        "xelatex -shell-escape -interaction nonstopmode %f"))
+      '("xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+        "xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+        "xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
 
 (add-to-list 'org-file-apps '("pdf" . "zathura %s"))
 
@@ -29,66 +31,23 @@
           (lambda ()
             (if (member "REFTEX" org-todo-keywords-1)
                 (org-mode-article-modes))))
-(unless (boundp 'org-export-latex-classes)
-  (setq org-latex-classes nil))
-
-(require 'ox-latex)
-(require 'ox-beamer)
 
 (add-to-list 'org-latex-classes
              '("cn-article"
-               "\\documentclass[12pt,a4paper]{article}
-\\usepackage{graphicx}
-\\usepackage{color}
-\\usepackage{lmodern}
-\\usepackage{verbatim}
-\\usepackage{fixltx2e}
-\\usepackage{longtable}
-\\usepackage{float}
-\\usepackage{tikz}
-\\usepackage{wrapfig}
-\\usepackage{soul}
-\\usepackage{textcomp}
-\\usepackage{geometry}
-\\usepackage{algorithm}
-\\usepackage{algorithmic}
-\\usepackage{marvosym}
-\\usepackage{wasysym}
-\\usepackage{latexsym}
-\\usepackage{natbib}
-\\usepackage{zhfontcfg}
-\\usepackage{fancyhdr}
-\\usepackage{fontspec,xunicode,xltxtra}
-\\usepackage{minted}
-\\usepackage[xetex,colorlinks=true,CJKbookmarks=true,linkcolor=blue,urlcolor=blue,menucolor=blue]{hyperref}
-\\hypersetup{unicode=true}
-\\geometry{a4paper, textwidth=6.5in, textheight=10in,marginparsep=7pt, marginparwidth=.6in}
-\\definecolor{foreground}{RGB}{220,220,204}%浅灰
-\\definecolor{background}{RGB}{62,62,62}%浅黑
-\\definecolor{preprocess}{RGB}{250,187,249}%浅紫
-\\definecolor{var}{RGB}{239,224,174}%浅肉色
-\\definecolor{string}{RGB}{154,150,230}%浅紫色
-\\definecolor{type}{RGB}{225,225,116}%浅黄
-\\definecolor{function}{RGB}{140,206,211}%浅天蓝
-\\definecolor{keyword}{RGB}{239,224,174}%浅肉色
-\\definecolor{comment}{RGB}{180,98,4}%深褐色
-\\definecolor{doc}{RGB}{175,215,175}%浅铅绿
-\\definecolor{comdil}{RGB}{111,128,111}%深灰
-\\definecolor{constant}{RGB}{220,162,170}%粉红
-\\definecolor{buildin}{RGB}{127,159,127}%深铅绿
-\\punctstyle{kaiming}
-\\pagestyle{fancy}
-\\fancyfoot[C]{\\bfseries\\thepage}
-\\chead{\\MakeUppercase\\sectionmark}
-\\tolerance=1000
-\\renewcommand{\\contentsname}{目录}
+               "\\documentclass{article}
 [NO-DEFAULT-PACKAGES]
-[NO-PACKAGES]"
+[EXTRA]
+[PACKAGES]
+\\renewcommand{\\contentsname}{目录}
+\\definecolor{codebg}{rgb}{0.9,0.9,0.9}
+\\setlength{\\headheight}{15pt}
+"
 ("\\section{%s}" . "\\section*{%s}")
 ("\\subsection{%s}" . "\\subsection*{%s}")
 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
 ("\\paragraph{%s}" . "\\paragraph*{%s}")
 ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+
 
 (add-to-list 'org-latex-classes
              '("org-article"
@@ -114,8 +73,6 @@
 \\usepackage{fancyhdr}
 \\usepackage{fontspec,xunicode,xltxtra}
 \\usepackage{minted}
-\\setCJKmainfont[Scale=0.9]{文泉驿正黑}%中文字体
-\\setCJKmonofont[Scale=0.9]{文泉驿等宽正黑}
 \\fancyfoot[C]{\\bfseries\\thepage}
 \\pagestyle{fancy}
                 [NO-DEFAULT-PACKAGES]
@@ -126,37 +83,6 @@
                ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
                ("\\paragraph{%s}" . "\\paragraph*{%s}")
                ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
-
-;; 使用Listings宏包格式化源代码(只是把代码框用listing环境框起来，还需要额外的设置)
-(setq org-latex-listings nil)
-;; Options for \lset command（reference to listing Manual)
-(setq org-latex-listings-options
-      '(
-        ("basicstyle" "\\color{foreground}\\small\\mono")           ; 源代码字体样式
-        ("keywordstyle" "\\color{function}\\bfseries\\small\\mono") ; 关键词字体样式
-        ("identifierstyle" "\\color{doc}\\small\\mono")
-        ("commentstyle" "\\color{comment}\\small\\itshape")         ; 批注样式
-        ("stringstyle" "\\color{string}\\small")                    ; 字符串样式
-        ("showstringspaces" "false")                                ; 字符串空格显示
-        ("numbers" "left")                                          ; 行号显示
-        ("numberstyle" "\\color{preprocess}")                       ; 行号样式
-        ("stepnumber" "1")                                          ; 行号递增
-        ("backgroundcolor" "\\color{background}")                   ; 代码框背景色
-        ("tabsize" "4")                                             ; TAB等效空格数
-        ("captionpos" "t")                                          ; 标题位置 top or buttom(t|b)
-        ("breaklines" "true")                                       ; 自动断行
-        ("breakatwhitespace" "true")                                ; 只在空格分行
-        ("showspaces" "false")                                      ; 显示空格
-        ("columns" "flexible")                                      ; 列样式
-        ("frame" "single")                                          ; 代码框：阴影盒
-        ("frameround" "tttt")                                       ; 代码框： 圆角
-        ("framesep" "0pt")
-        ("framerule" "8pt")
-        ("rulecolor" "\\color{background}")
-        ("fillcolor" "\\color{white}")
-        ("rulesepcolor" "\\color{comdil}")
-        ("framexleftmargin" "10mm")
-        ))
 
 ;; Make Org use ido-completing-read for most of its completing prompts.
 (setq org-completion-use-ido t)
@@ -178,24 +104,15 @@
    ))
 
 
-(setq org-emphasis-alist (quote (("*" bold "<b>" "</b>")
-                                 ("/" italic "<i>" "</i>")
-                                 ("_" underline "<span
-style=\"text-decoration:underline;\">" "</span>")
-                                 ("=" org-code "<code>" "</code>" verbatim)
-                                 ("~" org-verbatim "<code>" "</code>" verbatim)
-                                 ("+" (:strike-through t) "<del>" "</del>")
-                                 ("@" org-warning "<b>" "</b>")))
-      org-export-latex-emphasis-alist (quote
-                                       (("*" "\\textbf{%s}" nil)
-                                        ("/" "\\emph{%s}" nil)
-                                        ("_" "\\underline{%s}" nil)
-                                        ("+" "\\texttt{%s}" nil)
-                                        ("=" "\\verb=%s=" nil)
-                                        ("~" "\\verb~%s~" t)
-                                        ("@" "\\alert{%s}" nil)))
-      )
-(setq org-latex-listings 'minted)
+;; use minted as code colorizing tool
+(setq
+ org-latex-listings 'minted
+ org-latex-minted-options '(("bgcolor" "codebg")
+                            ("linenos" "false")
+                            ("frame" "lines")
+                            ("numbersep" "5pt")
+                            ("framesep" "2mm"))
+ )
 
 (setq org-latex-default-packages-alist
       '(("" "fixltx2e" nil)
@@ -215,6 +132,39 @@ style=\"text-decoration:underline;\">" "</span>")
         ("AUTO" "inputenc" t)
         ;; ("" "verbatim" nil)
         "\\tolerance=1000"))
+
+(setq org-latex-packages-alist
+      '(("" "graphicx" nil)
+        ("" "color" nil)
+        ("" "lmodern" nil)
+        ("" "verbatim" nil)
+        ("" "fixltx2e" nil)
+        ("" "longtable" nil)
+        ("" "float" nil)
+        ("" "tikz" nil)
+        ("" "wrapfig" nil)
+        ("" "soul" nil)
+        ("" "textcomp" nil)
+        ("" "geometry" nil)
+        ("" "algorithmic" nil)
+        ("" "marvosym" nil)
+        ("" "wasysym" nil)
+        ("" "latexsym" nil)
+        ("" "natbib" nil)
+        ("" "zhfontcfg" nil)
+        ("" "fancyhdr" nil)
+        ("" "fontspec" nil)
+        ("" "xunicode" nil)
+        ("" "xltxtra" nil)
+        ("" "minted" nil)
+        ("" "ulem" nil)
+        ("xetex,colorlinks=true,CJKbookmarks=true,linkcolor=blue,urlcolor=blue,menucolor=blue" "hyperref" nil)
+        "\\hypersetup{unicode=true}
+\\pagestyle{fancy}
+\\fancyfoot[C]{\\bfseries\\thepage}
+\\chead{\\MakeUppercase\\sectionmark}
+\\tolerance=1000
+"))
 
 
 (setq ps-paper-type 'a4

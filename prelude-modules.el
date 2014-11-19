@@ -1,5 +1,8 @@
-;;; Uncomment the modules you'd like to use and restart Prelude afterwards
+;;; prelude-modules.el -- select which modules should enable
 
+;;; Commentary:
+
+;;; code:
 (require 'prelude-c)
 ;; (require 'prelude-clojure)
 ;; (require 'prelude-coffee)
@@ -10,6 +13,7 @@
 ;; (require 'prelude-erlang)
 ;; (require 'prelude-haskell)
 (require 'prelude-helm-everywhere)
+(require 'prelude-auto-complete)
 (require 'prelude-js)
 ;; (require 'prelude-key-chord)
 ;; (require 'prelude-latex)
@@ -25,3 +29,7 @@
 ;; (require 'prelude-web)
 (require 'prelude-xml)
 (require 'prelude-dot)
+(require 'prelude-misc)
+
+(provide 'prelude-modules)
+;;; prelude-modules.el ends here

@@ -116,6 +116,10 @@
 (global-set-key (kbd "s->") 'ace-jump-buffer)
 (global-set-key (kbd "s-w") 'ace-window)
 
+;; reversible for delete other windows
+;; (require 'zygospore)
+(global-set-key (kbd "C-x 1") 'zygospore-toggle-delete-other-windows)
+
 (provide 'prelude-global-keybindings)
 
 ;;; prelude-global-keybindings.el ends here

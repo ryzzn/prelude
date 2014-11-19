@@ -1,3 +1,6 @@
+;;; package --- Summary
+;;; Commentary:
+;;; Code:
 ;; @see http://cx4a.org/software/auto-complete/manual.html
 (require 'auto-complete-config)
 (prelude-require-package 'auto-complete-clang)
@@ -25,8 +28,10 @@
 
 ;; Exclude very large buffers from dabbrev
 (defun sanityinc/dabbrev-friend-buffer (other-buffer)
+  "Exclude very large buffers `OTHER-BUFFER' from dabbrev."
   (< (buffer-size other-buffer) (* 1 1024 1024)))
 
+(require 'dabbrev)
 (setq dabbrev-friend-buffer-function 'sanityinc/dabbrev-friend-buffer)
 
 ;; clang stuff
@@ -52,11 +57,12 @@
   ; fixed rinari's bug
   (remove-hook 'find-file-hook 'rinari-launch)
 
-  (setq ac-clang-auto-save t)
+  ; (setq ac-clang-auto-save t)
   )
 
 (add-hook 'c-mode-common-hook 'my-ac-cc-mode-setup)
 
 (ac-config-default)
 
-(provide 'init-auto-complete)
+(provide 'prelude-auto-complete)
+;;; prelude-auto-complete.el ends here
