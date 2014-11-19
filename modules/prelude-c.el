@@ -44,9 +44,7 @@
   (local-set-key "\M-b" 'c-backward-into-nomenclature)
   (setq cc-search-directories '("." ".." "/usr/include" "/usr/local/include/*"))
   (setq c-style-variables-are-local-p nil)
-  (setq c-auto-newline t)               ; give me NO newline
-                                        ; automatically after electric
-                                        ; expressions are entered
+  (setq c-auto-newline nil)
 
   ;; syntax-highlight aggressively
   ;; (setq font-lock-support-mode 'lazy-lock-mode)
@@ -67,6 +65,8 @@
                                        (file-name-directory (get-closest-pathname))))
                                  (compile "make -j10"))))
   (local-set-key (kbd "M-~") 'recompile)
+  (company-mode)
+  (sydi/company-cc-mode-setup)
 
   ;; @see https://github.com/seanfisk/cmake-flymake
   ;; make sure you project use cmake
