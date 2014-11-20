@@ -117,7 +117,7 @@
 (global-set-key (kbd "s-w") 'ace-window)
 
 ;; reversible for delete other windows
-;; (require 'zygospore)
+(prelude-require-package 'zygospore)
 (global-set-key (kbd "C-x 1") 'zygospore-toggle-delete-other-windows)
 
 (provide 'prelude-global-keybindings)
