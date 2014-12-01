@@ -13,7 +13,8 @@
 ;; (require 'prelude-erlang)
 ;; (require 'prelude-haskell)
 (require 'prelude-helm-everywhere)
-(require 'prelude-auto-complete)
+(require 'prelude-company)
+;; (require 'prelude-auto-complete)
 (require 'prelude-js)
 ;; (require 'prelude-key-chord)
 ;; (require 'prelude-latex)
@@ -29,6 +30,7 @@
 ;; (require 'prelude-web)
 (require 'prelude-xml)
 (require 'prelude-dot)
+(require 'prelude-ediff)
 (require 'prelude-misc)
 
 (provide 'prelude-modules)
