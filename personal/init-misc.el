@@ -36,6 +36,8 @@
           '(("no_proxy" . "^\\(localhost\\|10.*\\)")
             ("http" . "sydi.org:3328")
             ("https" . "sydi.org:3328")
+            ;; ("http" . "10.23.8.125:3128")
+            ;; ("https" . "10.23.8.125:3128")
             )))
   (message
    (if (bound-and-true-p url-proxy-services)
