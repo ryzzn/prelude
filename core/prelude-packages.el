@@ -78,7 +78,6 @@
     smartrep
     undo-tree
     volatile-highlights
-    zenburn-theme
     yasnippet
     dropdown-list org org-journal ox-reveal org-plus-contrib org-fstree
     ggtags header2 sunrise-commander sunrise-x-popviewer

@@ -19,8 +19,6 @@
       (insert (format "%4d %c\n" i i))))
   (goto-char (point-min)))
 
-(setq compilation-scroll-output t)
-
 ;; http://stackoverflow.com/a/13407502/3627264
 (add-hook 'sql-mode-hook
           (lambda ()
@@ -38,6 +36,8 @@
           '(("no_proxy" . "^\\(localhost\\|10.*\\)")
             ("http" . "sydi.org:3328")
             ("https" . "sydi.org:3328")
+            ;; ("http" . "10.23.8.125:3128")
+            ;; ("https" . "10.23.8.125:3128")
             )))
   (message
    (if (bound-and-true-p url-proxy-services)

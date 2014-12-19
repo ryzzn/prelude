@@ -9,7 +9,7 @@
 ;; Package-Requires: ()
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 357
+;;     Update #: 358
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -187,8 +187,7 @@
       <div id=\"page-content\">
         <div class=\"post single\">
           <ul class=\"meta\"></ul>
-          <div class=\"feature-image\"></div>
-          <div class=\"the-content\">
+            <div class=\"the-content\">
             <!-- content -->
             %s
             <!-- comment box -->

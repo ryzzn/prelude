@@ -56,7 +56,7 @@ Default build directory is set as 'build'."
   (local-set-key "\M-b" 'c-backward-into-nomenclature)
   (setq cc-search-directories '("." ".." "/usr/include" "/usr/local/include/*"))
   (setq c-style-variables-are-local-p nil)
-  ;; (setq c-auto-newline t)
+  (setq c-auto-newline nil)
 
   ;; syntax-highlight aggressively
   ;; (setq font-lock-support-mode 'lazy-lock-mode)
@@ -76,6 +76,8 @@ Default build directory is set as 'build'."
                                (let ((default-directory (ryzn/get-real-builddir)))
                                  (compile "make -j10"))))
   (local-set-key (kbd "M-~") 'recompile)
+  (company-mode)
+  (sydi/company-cc-mode-setup)
 
   ;; @see https://github.com/seanfisk/cmake-flymake
   ;; make sure you project use cmake
@@ -103,7 +105,6 @@ Default build directory is set as 'build'."
 (setq prelude-makefile-mode-hook 'prelude-makefile-mode-defaults)
 
 (add-hook 'makefile-mode-hook (lambda ()
-                                (run-hooks 'prelude-makefile-mode-hook)))
-(provide 'prelude-c)
+                                (run-hooks 'prelude-makefile-mode-hook))) (provide 'prelude-c)
 
 ;;; prelude-c.el ends here

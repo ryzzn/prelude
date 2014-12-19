@@ -1,0 +1,3 @@
+[submodule "vendor/zenburn-emacs"]
+	path = vendor/zenburn-emacs
+	url = git@github.com:ryzzn/zenburn-emacs.git
