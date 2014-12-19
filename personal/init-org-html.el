@@ -9,7 +9,7 @@
 ;; Package-Requires: ()
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 12
+;;     Update #: 357
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -511,13 +511,24 @@ If #+date keyword is not set and `other' equals to \"modify\", return the file s
       (plist-get (org-infile-export-plist) :date))))
 
 (require 'find-lisp)
-(defun sydi/get-sorted-org-files (root-dir)
-  "return a sorted org files list"
-  (let* ((org-files (remove-if
+(defun sydi/get-sorted-org-files-quick (root-dir)
+  "get sorted org files quickly, with cache"
+  (let ((org-files (remove-if
                     (lambda (ele) (member-if
                                    (lambda (match-reg) (string-match-p match-reg (file-name-nondirectory ele)))
                                    sydi/atom-exclude-file-list))
-                    (find-lisp-find-files root-dir "\\.org$")))
+                    (find-lisp-find-files root-dir "\\.org$"))))
+    (dolist (file sydi/sorted-org-files)
+      (delete file org-files))
+    org-files))
+
+(defun sydi/get-sorted-org-files (root-dir)
+  "return a sorted org files list"
+  (let* ((org-files (remove-if
+                     (lambda (ele) (member-if
+                                    (lambda (match-reg) (string-match-p match-reg (file-name-nondirectory ele)))
+                                    sydi/atom-exclude-file-list))
+                     (find-lisp-find-files root-dir "\\.org$")))
          (org-alist (mapcar (lambda (file) (cons file (sydi/get-org-file-date file))) org-files))
          (sorted-files (mapcar 'car
                                (sort org-alist
@@ -528,6 +539,94 @@ If #+date keyword is not set and `other' equals to \"modify\", return the file s
                                               (B (+ (lsh (car bdate) 16) (cadr bdate))))
                                          (>= A B)))))))
     sorted-files))
+
+;; (customize-save-variable 'sydi/sorted-org-files (sydi/get-sorted-org-files "~/sydi.org/org"))
+
+(defun sydi/get-valid-org-files (root-dir)
+  (let* ((all-org-files (find-lisp-find-files root-dir "\\.org$"))
+         (exclude-regexes sydi/atom-exclude-file-list)
+         (exclude-file-p (lambda (org-file)
+                           (member-if
+                            (lambda (regex)
+                              (string-match-p regex (file-name-nondirectory org-file)))
+                            exclude-regexes))))
+    (remove-if exclude-file-p all-org-files)))
+
+(defun sydi/get-all-tags ()
+  "return: ((tag1 meta1 meta2 ...) (tag2 meta1 ...) ...)"
+  (let ((all-meta (sydi/get-all-meta))
+        (result))
+    (dolist (meta all-meta result)
+      (dolist (tag (split-string (or (plist-get meta :keywords) "")) result)
+        (let ((item (assoc tag result)))
+          (if item
+              (add-to-list 'item meta)
+            (add-to-list 'result (list tag meta))))))))
+
+(defun sydi/format-tag-cloud ()
+  (let ((html "<div id=\"tag-cloud\">"))
+    (dolist (item (sydi/get-all-tags) html)
+      (setq html
+            (concat html
+                    (format "<a href=\"#\" rel=\"%d\">%s</a>"
+                            (length (cdr item))
+                            (car item) ))))
+    (setq html (concat html "</div>"))))
+
+;; (append-to-file (sydi/format-tag-cloud) nil "~/tagcloud.html")
+
+;; (dolist (plist (sydi/get-all-date-sorted-meta))
+;;   (message "%s: %s" (plist-get plist :date) (plist-get plist :title)))
+
+
+(defun sydi/get-all-date-sorted-meta ()
+  "return: (meta1 meta2 ...)
+All meta are sorted by it's date property."
+  (defun comp-date (adate bdate)
+    (let ((A (+ (lsh (car adate) 16) (cadr adate)))
+          (B (+ (lsh (car bdate) 16) (cadr bdate))))
+      (>= A B)))
+  (defun cons-date (strdate)
+    (if strdate
+        (org-time-string-to-time strdate)
+      '(0 0)))
+  (defun comp-org-date (aplist bplist)
+    (let ((adate (cons-date (plist-get aplist :date)))
+          (bdate (cons-date (plist-get bplist :date))))
+      (comp-date adate bdate)))
+  (sydi/get-all-sorted-meta 'comp-org-date))
+
+(defun sydi/get-all-sorted-meta (pred)
+  "use `pred' sort meta-list"
+  (sort (sydi/get-all-meta) pred))
+
+(defun sydi/get-all-meta ()
+  "Get all org files' meta by scan their file directly."
+  (mapcar 'sydi/get-org-meta (sydi/get-valid-org-files sydi/base-directory)))
+
+(defun sydi/get-org-meta (org-file)
+  (defun sydi/interpret (plist prop)
+    (plist-put plist prop
+               (let ((v (plist-get plist prop)))
+                 (cond ((consp v)
+                        (decode-coding-string
+                         (substring-no-properties
+                          (org-element-interpret-data v))
+                         'utf-8))
+                       ((stringp v)
+                        (decode-coding-string v 'utf-8))
+                       (t v)))))
+  (let ((visiting (find-buffer-visiting org-file)))
+    (save-excursion
+      (org-pop-to-buffer-same-window (or visiting (find-file-noselect org-file nil t)))
+      (let ((plist (org-export--get-inbuffer-options)))
+        (unless visiting
+          (kill-buffer (current-buffer)))
+        (dotimes (idx (length plist))
+          (if (= 0 (% idx 2))
+              (let ((prop (nth idx plist)))
+                (sydi/interpret plist prop))))
+        (plist-put plist :file org-file)))))
 
 ;;; for sitemap.xml
 (defun sydi/all-urls (root-dir prefix)
