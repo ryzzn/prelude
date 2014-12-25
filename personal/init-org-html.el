@@ -9,7 +9,7 @@
 ;; Package-Requires: ()
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 358
+;;     Update #: 375
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -312,7 +312,7 @@ Default for SITEMAP-FILENAME is 'sitemap.org'."
            :components ("sydi-pages" "sydi-static"))
           ("sydi-static"
            :base-directory "~/sydi.org/org/"
-           :base-extension "xml\\|css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf\\|html\\|div\\|pl\\|template\\|txt\\|woff\\|eot"
+           :base-extension "xml\\|css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf\\|html\\|div\\|pl\\|template\\|txt\\|woff\\|eot\\|sh"
            :publishing-directory "~/sydi.org/html"
            :recursive t
            :publishing-function org-publish-attachment)
@@ -557,9 +557,12 @@ If #+date keyword is not set and `other' equals to \"modify\", return the file s
         (result))
     (dolist (meta all-meta result)
       (dolist (tag (split-string (or (plist-get meta :keywords) "")) result)
-        (let ((item (assoc tag result)))
+        (let* ((tag (downcase tag))
+              (item (assoc tag result)))
           (if item
-              (add-to-list 'item meta)
+              (progn
+                (setcdr item (cons meta (cdr item)))
+                (message "%s: %s" tag (plist-get meta :title)))
             (add-to-list 'result (list tag meta))))))))
 
 (defun sydi/format-tag-cloud ()
@@ -567,7 +570,7 @@ If #+date keyword is not set and `other' equals to \"modify\", return the file s
     (dolist (item (sydi/get-all-tags) html)
       (setq html
             (concat html
-                    (format "<a href=\"#\" rel=\"%d\">%s</a>"
+                    (format "<a href=\"#\" rel=\"%d\">%s</a>\n"
                             (length (cdr item))
                             (car item) ))))
     (setq html (concat html "</div>"))))
