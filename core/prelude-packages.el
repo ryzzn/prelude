@@ -1,6 +1,6 @@
 ;;; prelude-packages.el --- Emacs Prelude: default package selection.
 ;;
-;; Copyright © 2011-2013 Bozhidar Batsov
+;; Copyright © 2011-2014 Bozhidar Batsov
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: https://github.com/bbatsov/prelude
@@ -35,11 +35,9 @@
 (require 'cl)
 (require 'package)
 
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
 (add-to-list 'package-archives '("SC" . "http://joseito.republika.pl/sunrise-commander/") t)
-(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
 
 ;; set package-user-dir to be relative to Prelude install path
 (setq package-user-dir (expand-file-name "elpa" prelude-dir))
@@ -49,7 +47,6 @@
   '(ace-jump-mode
     ace-jump-buffer
     ace-window
-    ack-and-a-half
     anzu
     browse-kill-ring
     dash
@@ -150,6 +147,7 @@ PACKAGE is installed only if not already present.  The file is opened in MODE."
     ("\\.groovy\\'" groovy-mode groovy-mode)
     ("\\.haml\\'" haml-mode haml-mode)
     ("\\.hs\\'" haskell-mode haskell-mode)
+    ("\\.kv\\'" kivy-mode kivy-mode)
     ("\\.latex\\'" auctex LaTeX-mode)
     ("\\.less\\'" less-css-mode less-css-mode)
     ("\\.lua\\'" lua-mode lua-mode)
@@ -158,6 +156,7 @@ PACKAGE is installed only if not already present.  The file is opened in MODE."
     ("\\.ml\\'" tuareg tuareg-mode)
     ("\\.pp\\'" puppet-mode puppet-mode)
     ("\\.php\\'" php-mode php-mode)
+    ("\\.proto\\'" protobuf-mode protobuf-mode)
     ("PKGBUILD\\'" pkgbuild-mode pkgbuild-mode)
     ("\\.rs\\'" rust-mode rust-mode)
     ("\\.sass\\'" sass-mode sass-mode)
