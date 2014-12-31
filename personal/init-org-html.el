@@ -9,7 +9,7 @@
 ;; Package-Requires: ()
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 375
+;;     Update #: 376
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -114,7 +114,7 @@
 
 (defun sydi/final-export (contents backend info)
   "Filter to indent the HTML and convert HTML entities."
-  (if (eq backend 'html)
+  (if (and (plist-get info :body-only) (eq backend 'html))
       (sydi/final-html-export-filter contents info)))
 
 ;;;###autoload
