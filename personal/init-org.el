@@ -1,5 +1,56 @@
+;;; init-org.el ---
+;;
+;; Filename: init-org.el
+;; Description:
+;; Author: Shi Yudi
+;; Maintainer:
+;; Created: 2015-01-03T10:17:31+0800
+;; Version:
+;; Package-Requires: ()
+;; Last-Updated:
+;;           By:
+;;     Update #: 3
+;; URL:
+;; Doc URL:
+;; Keywords:
+;; Compatibility:
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;;; Commentary:
+;;
+;;
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;;; Change Log:
+;;
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; This program is free software: you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation, either version 3 of the License, or (at
+;; your option) any later version.
+;;
+;; This program is distributed in the hope that it will be useful, but
+;; WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+;; General Public License for more details.
+;;
+;; You should have received a copy of the GNU General Public License
+;; along with GNU Emacs.  If not, see <http://www.gnu.org/licenses/>.
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;;; Code:
+
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
+
+(require 'org)
+(require 'org-agenda)
+(require 'org-clock)
 
 (eval-after-load 'org
   '(progn
@@ -35,8 +86,6 @@
            org-agenda-include-diary t
            org-agenda-window-setup 'current-window
            org-fast-tag-selection-single-key 'expert
-           org-export-kill-product-buffer-when-displayed t
-           org-export-odt-preferred-output-format "doc"
            org-tags-column 80
            ;; @see http://irreal.org/blog/?p=671
            org-src-fontify-natively t
@@ -57,7 +106,7 @@
 (eval-after-load 'org-clock
   '(progn
      ;; Save the running clock and all clock history when exiting Emacs, load it on startup
-     (setq org-clock-persistence-insinuate t)
+     ;; (setq org-clock-persistence-insinuate t)
      (setq org-clock-persist t)
      (setq org-clock-in-resume t)
 
@@ -85,8 +134,8 @@
   '(progn
      (custom-set-variables
       '(org-journal-dir "~/personal/org/journal")
-      '(org-agenda-files (quote ("~/personal/todo.org" "~/personal/org/notes.org")))
-      '(org-default-notes-file "~/personal/notes.org")
+      '(org-agenda-files (quote ("~/personal/org/todo.org" "~/personal/org/notes.org")))
+      '(org-default-notes-file "~/personal/org/notes.org")
       '(org-agenda-span 7)
       '(org-deadline-warning-days 14)
       '(org-agenda-show-all-dates t)
@@ -115,3 +164,5 @@
      (message "load org-mode")))
 
 (provide 'init-org)
+
+;;; init-org.el ends here
