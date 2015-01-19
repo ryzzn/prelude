@@ -9,7 +9,7 @@
 ;; Package-Requires: ()
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 3
+;;     Update #: 5
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -134,7 +134,7 @@
   '(progn
      (custom-set-variables
       '(org-journal-dir "~/personal/org/journal")
-      '(org-agenda-files (quote ("~/personal/org/todo.org" "~/personal/org/notes.org")))
+      '(org-agenda-files (quote ("~/personal/org/todo-list.org")))
       '(org-default-notes-file "~/personal/org/notes.org")
       '(org-agenda-span 7)
       '(org-deadline-warning-days 14)
