@@ -13,8 +13,8 @@
 (define-key global-map "\C-cc" 'org-capture)
 
 (setq org-capture-templates
-      '(("t" "Todo" entry (file+headline "~/personal/org/notes.org" "Tasks")
-         "* TODO %?\n%i\n%a")
+      '(("t" "Todo" entry (file "~/personal/org/todo-list.org")
+         "* TODO %?\n[%<%F %a %R>]\n%i\n")
         ("w" "Work Journal" entry (file+headline "~/personal/org/notes.org" "Work journal")
          "* %?\nEntered on %U")
         ("n" "Notes" entry (file+headline "~/personal/org/notes.org" "Notes")
