@@ -35,17 +35,30 @@
 (require 'prelude-programming)
 (require 'new-oceanbase-style)
 
-(defun ryzn/get-real-builddir ()
+(defun ryzn/get-real-builddir (&optional upper)
   "Get relative object path of source code directory.
-Default build directory is set as 'build'."
+Default build directory is set as 'build'.
+`UPPER' means how many count should ignore Compile file."
   (interactive)
+
+  (defun go-upper (upper)
+    (let ((get-dir (file-name-directory (get-closest-pathname "Makefile.am"))))
+      (if (or (not upper) (= 0 upper))
+          get-dir
+          (let ((default-directory (file-name-directory (directory-file-name get-dir))))
+            (go-upper (1- upper))))))
+
   (let* ((src-topdir (file-name-directory (get-closest-pathname "configure.ac")))
          (build-topdir (concat src-topdir "/build"))
-         (rel-curdir (file-relative-name (file-name-directory (get-closest-pathname "Makefile.am")) src-topdir))
-         (build-path (expand-file-name (concat build-topdir "/" rel-curdir))))
-    build-path
-    (message build-path)
-    ))
+         (rel-curdir (file-relative-name (go-upper upper) src-topdir)))
+    (message rel-curdir)
+    (expand-file-name (concat build-topdir "/" rel-curdir))))
+
+(defun ryzn/build (upper)
+  "Compile project with directory by finding `UPPER' latest Makefile."
+  (interactive "NGo Upper Count: ")
+  (let ((default-directory (ryzn/get-real-builddir upper)))
+    (compile "make -j10")))
 
 ;; C/C++ SECTION
 (defun sydi/c++-mode-hook()
@@ -71,12 +84,9 @@ Default build directory is set as 'build'."
   (local-set-key "\C-m" 'newline-and-indent)
   (local-set-key (kbd "RET") 'newline-and-indent)
 
-  (local-set-key (kbd "M-`") (lambda ()
-                               (interactive)
-                               (let ((default-directory (ryzn/get-real-builddir)))
-                                 (compile "make -j10"))))
+  (local-set-key (kbd "M-`") 'ryzn/build)
   (local-set-key (kbd "M-~") 'recompile)
-  (company-mode)
+
   (sydi/company-cc-mode-setup)
 
   ;; @see https://github.com/seanfisk/cmake-flymake
