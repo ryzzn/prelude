@@ -32,8 +32,6 @@
 
 ;;; Code:
 
-(prelude-require-packages '(guru-mode smartparens))
-
 (defun prelude-local-comment-auto-fill ()
   (set (make-local-variable 'comment-auto-fill-only-comments) t))
 
