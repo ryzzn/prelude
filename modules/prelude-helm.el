@@ -59,6 +59,7 @@
 (define-key helm-command-map (kbd "g")     'helm-do-grep)
 (define-key helm-command-map (kbd "C-c w") 'helm-wikipedia-suggest)
 (define-key helm-command-map (kbd "SPC")   'helm-all-mark-rings)
+(define-key helm-command-map (kbd "m")     'man)
 
 (global-set-key (kbd "C-c p s a") 'helm-projectile-ack)
 
