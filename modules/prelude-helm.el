@@ -62,7 +62,6 @@
 (define-key helm-command-map (kbd "m")     'man)
 
 (setq helm-display-header-line nil)
-(set-face-attribute 'helm-source-header nil :height 0.1)
 
 (helm-autoresize-mode t)
 (setq helm-autoresize-max-height 30)
