@@ -61,6 +61,15 @@
 (define-key helm-command-map (kbd "SPC")   'helm-all-mark-rings)
 (define-key helm-command-map (kbd "m")     'man)
 
+(setq helm-display-header-line nil)
+(set-face-attribute 'helm-source-header nil :height 0.1)
+
+(helm-autoresize-mode t)
+(setq helm-autoresize-max-height 30)
+(setq helm-autoresize-min-height 30)
+
+(setq helm-split-window-in-side-p t)
+
 (global-set-key (kbd "C-c p s a") 'helm-projectile-ack)
 
 (push "Press <C-c p h> to navigate a project in Helm." prelude-tips)
