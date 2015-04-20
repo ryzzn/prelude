@@ -58,7 +58,7 @@ Default build directory is set as 'build'.
   "Compile project with directory by finding `UPPER' latest Makefile."
   (interactive "NGo Upper Count: ")
   (let ((default-directory (ryzn/get-real-builddir upper)))
-    (compile "make -j10")))
+    (compile "make -s -j10 LIBTOOLFLAGS=--silent")))
 
 ;; C/C++ SECTION
 (defun sydi/c++-mode-hook()

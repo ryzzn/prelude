@@ -41,6 +41,9 @@ I want it. Makes sure spaces are used for indentation, not tabs."
                     (lua-indent-level . 4)
                     (lua-indent-level . 8)))
             (flymake-lua-load)
-            ))
+            )
+          (setq lua-indent-level 2))
+
+
 
 (provide 'init-lua-mode)
