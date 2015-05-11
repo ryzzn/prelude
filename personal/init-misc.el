@@ -44,6 +44,9 @@
        "setting url proxy done!" "cancel url proxy done!"))
   )
 
+;; disable auto save undo history to file because /tmp directory write
+;; latency is too high.
+(setq undo-tree-auto-save-history nil)
 
 (provide 'init-misc)
 ;;; init-misc.el ends here
