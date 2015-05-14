@@ -48,5 +48,9 @@
 ;; latency is too high.
 (setq undo-tree-auto-save-history nil)
 
+;; auto insert symbol at point when using ag to search
+(setq helm-ag-insert-at-point 'symbol)
+
+
 (provide 'init-misc)
 ;;; init-misc.el ends here
