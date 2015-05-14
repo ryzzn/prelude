@@ -2,5 +2,4 @@
 # name: return ret;
 # key: rr
 # --
-return ret;$>
-$0$>
+return ret;$0
