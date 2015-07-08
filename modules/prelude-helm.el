@@ -66,6 +66,8 @@
 (helm-autoresize-mode t)
 (setq helm-autoresize-max-height 30)
 (setq helm-autoresize-min-height 30)
+;; http://emacs.stackexchange.com/questions/485/how-to-widen-helm-buffer-names-in-helm-buffers-list
+(setq helm-buffer-max-length 30)
 
 (setq helm-split-window-in-side-p t)
 
