@@ -51,6 +51,8 @@
 ;; auto insert symbol at point when using ag to search
 (setq helm-ag-insert-at-point 'symbol)
 
+;; disable magit auto revert
+(setq magit-auto-revert-mode nil)
 
 (provide 'init-misc)
 ;;; init-misc.el ends here
