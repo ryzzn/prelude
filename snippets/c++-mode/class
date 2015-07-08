@@ -3,7 +3,7 @@
 # key: cls
 # contributor: Shi Yudi<a@sydi.org>
 # --
-class ${1:`(replace-regexp-in-string "_\\|.H" "" (upcase-initials (file-name-nondirectory (file-name-sans-extension (buffer-file-name)))))`}
+class ${1:`(replace-regexp-in-string "_\\|\\.H" "" (upcase-initials (file-name-nondirectory (file-name-sans-extension (buffer-file-name)))))`}
 {
 public:
     ${1:$(yas-substr yas-text "[^: ]*")}();
