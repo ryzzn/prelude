@@ -40,6 +40,9 @@
 ;; navigate window
 (window-numbering-mode)
 
+;; bind C-c C-f to ggtags, i use it very well
+(global-set-key (kbd "C-c C-f") 'ggtags-find-file)
+
 (provide 'prelude-misc)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
