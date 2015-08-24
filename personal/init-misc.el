@@ -54,5 +54,8 @@
 ;; disable magit auto revert
 (setq magit-auto-revert-mode nil)
 
+;; my personal gcc
+(setq-default flycheck-c/c++-gcc-executable "/home/fufeng.syd/.local/bin/gcc")
+
 (provide 'init-misc)
 ;;; init-misc.el ends here
