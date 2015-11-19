@@ -9,7 +9,7 @@
 ;; Package-Requires: (graphviz-dot-mode)
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 46
+;;     Update #: 47
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -48,6 +48,7 @@
 ;;; Code:
 
 (prelude-require-package 'graphviz-dot-mode)
+(require 'org)                          ; require `org-src-lang-modes'
 (require 'graphviz-dot-mode)
 
 

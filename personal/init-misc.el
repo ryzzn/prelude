@@ -56,6 +56,58 @@
 
 ;; my personal gcc
 (setq-default flycheck-c/c++-gcc-executable "/home/fufeng.syd/.local/bin/gcc")
+(setq-default flycheck-gcc-args '("-D__STDC_LIMIT_MACROS"
+                                  "-DSTDC_HEADERS=1"
+                                  "-DHAVE_SYS_TYPES_H=1"
+                                  "-DHAVE_SYS_STAT_H=1"
+                                  "-DHAVE_STDLIB_H=1"
+                                  "-DHAVE_STRING_H=1"
+                                  "-DHAVE_MEMORY_H=1"
+                                  "-DHAVE_STRINGS_H=1"
+                                  "-DHAVE_INTTYPES_H=1"
+                                  "-DHAVE_STDINT_H=1"
+                                  "-DHAVE_UNISTD_H=1"
+                                  "-DHAVE_DLFCN_H=1"
+                                  "-I."
+                                  "-I/home/fufeng.syd/code/dev/src/observer"
+                                  "-I/home/fufeng.syd/ins/tblib/include/tbsys"
+                                  "-I/home/fufeng.syd/ins/easy/include/easy"
+                                  "-I/home/fufeng.syd/code/dev/include"
+                                  "-I/home/fufeng.syd/code/dev/src"
+                                  "-Wall"
+                                  "-Werror"
+                                  "-Wextra"
+                                  "-Wunused-parameter"
+                                  "-Wformat"
+                                  "-Wconversion"
+                                  "-Wno-deprecated"
+                                  "-fno-strict-aliasing"
+                                  "-I/usr/include""-I/usr/include/mysql"
+                                  ))
+
+;; (defadvice flymake-find-buildfile
+;;     (around advice-find-makefile-separate-obj-dir
+;;             activate compile)
+;;   "Look for buildfile in a separate build directory"
+;;   (let* ((source-dir (ad-get-arg 1))
+;;          (bld-dir (ac-build-dir source-dir)))
+;;     (ad-set-arg 1 bld-dir)
+;;     ad-do-it))
+
+;; (defun ac-find-configure (source-dir)
+;;   (locate-dominating-file source-dir "configure"))
+
+;; (defvar project-build-root "/home/fufeng.syd/code/dev/build/"
+;;   "top build directory of the project")
+
+;; (defun ac-build-dir (source-dir)
+;;   "find the build directory for the given source directory"
+;;   (condition-case nil
+;;       (let* ((topdir (ac-find-configure source-dir))
+;;              (subdir (file-relative-name (file-name-directory source-dir) topdir))
+;;              (blddir (concat (file-name-as-directory project-build-root) subdir)))
+;;         (locate-dominating-file blddir "Makefile"))
+;;     (error source-dir)))
 
 (provide 'init-misc)
 ;;; init-misc.el ends here
