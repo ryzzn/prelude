@@ -35,9 +35,12 @@
 (require 'cl)
 (require 'package)
 
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
-(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
-(add-to-list 'package-archives '("SC" . "http://joseito.republika.pl/sunrise-commander/") t)
+(add-to-list 'package-archives
+             '("org" . "http://orgmode.org/elpa/") t)
+(add-to-list 'package-archives
+             '("SC" . "http://joseito.republika.pl/sunrise-commander/") t)
+(add-to-list 'package-archives
+             '("melpa" . "https://melpa.org/packages/") t)
 
 ;; set package-user-dir to be relative to Prelude install path
 (setq package-user-dir (expand-file-name "elpa" prelude-dir))
@@ -47,6 +50,7 @@
   '(ace-window
     avy
     anzu
+    beacon
     browse-kill-ring
     dash
     discover-my-major
@@ -147,6 +151,7 @@ PACKAGE is installed only if not already present.  The file is opened in MODE."
     ("\\.csv\\'" csv-mode csv-mode)
     ("\\.d\\'" d-mode d-mode)
     ("\\.dart\\'" dart-mode dart-mode)
+    ("\\.elm\\'" elm-mode elm-mode)
     ("\\.ex\\'" elixir-mode elixir-mode)
     ("\\.exs\\'" elixir-mode elixir-mode)
     ("\\.elixir\\'" elixir-mode elixir-mode)
@@ -176,6 +181,7 @@ PACKAGE is installed only if not already present.  The file is opened in MODE."
     ("\\.scala\\'" scala-mode2 scala-mode)
     ("\\.scss\\'" scss-mode scss-mode)
     ("\\.slim\\'" slim-mode slim-mode)
+    ("\\.styl\\'" stylus-mode stylus-mode)
     ("\\.swift\\'" swift-mode swift-mode)
     ("\\.textile\\'" textile-mode textile-mode)
     ("\\.thrift\\'" thrift thrift-mode)
