@@ -1,6 +1,6 @@
 ;;; prelude-c.el --- Emacs Prelude: cc-mode configuration.
 ;;
-;; Copyright © 2011-2014 Bozhidar Batsov
+;; Copyright © 2011-2015 Bozhidar Batsov
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: https://github.com/bbatsov/prelude
@@ -99,6 +99,11 @@ Default build directory is set as 'build'.
 (add-to-list 'auto-mode-alist '("\\.ipp\\'" . c++-mode))
 
 (defun prelude-c-mode-common-defaults ()
+  "Some docstring."
+  (setq
+   c-default-style "k&r"
+   c-basic-offset 4)
+  (c-set-offset 'substatement-open 0)
   (sydi/c++-mode-hook))
 
 (setq prelude-c-mode-common-hook 'prelude-c-mode-common-defaults)
