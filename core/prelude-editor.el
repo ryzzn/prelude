@@ -203,9 +203,9 @@ The body of the advice is in BODY."
            (line-beginning-position 2)))))
 
 ;; tramp, for sudo access
-(require 'tramp)
+;; (require 'tramp)
 ;; keep in mind known issues with zsh - see emacs wiki
-(setq tramp-default-method "ssh")
+;; (setq tramp-default-method "ssh")
 
 (set-default 'imenu-auto-rescan t)
 
