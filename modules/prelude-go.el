@@ -73,7 +73,10 @@
        (go-eldoc-setup)
 
        ;; CamelCase aware editing operations
-       (subword-mode +1))
+       (subword-mode +1)
+
+       ;; set tab width
+       (setq tab-width 4))
 
      (setq prelude-go-mode-hook 'prelude-go-mode-defaults)
 
