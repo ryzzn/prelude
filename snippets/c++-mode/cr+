@@ -1,0 +1,11 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: copy right for oceanbase
+# key: cr+
+# --
+// Copyright (c) 2014-2016 Alibaba Inc. All Rights Reserved.
+//
+// Author:
+//   Shi Yudi <fufeng.syd@alipay.com>
+//
+// Normalizer:
+//   Shi Yudi <fufeng.syd@alipay.com>

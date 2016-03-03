@@ -1,0 +1,10 @@
+# name: OCEABASE version #ifndef XXX; #define XXX; #endif
+# key: once+
+# expand-env: ((file-name-upcase (upcase (file-name-sans-extension (replace-regexp-in-string "/" "_" (replace-regexp-in-string "^.*/src/" "" (buffer-file-name)))))))
+# --
+#ifndef ${1:_OCEABASE_`file-name-upcase`_H_}
+#define $1
+
+$0
+
+#endif /* $1 */
