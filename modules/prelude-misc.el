@@ -43,6 +43,9 @@
 ;; bind C-c C-f to ggtags, i use it very well
 (global-set-key (kbd "C-c C-f") 'ggtags-find-file)
 
+(require 'session)
+(add-hook 'after-init-hook 'session-initialize)
+
 (provide 'prelude-misc)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

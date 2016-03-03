@@ -46,7 +46,9 @@
      (defun prelude-js-mode-defaults ()
        ;; electric-layout-mode doesn't play nice with smartparens
        (setq-local electric-layout-rules '((?\; . after)))
+       (setq js-indent-level 2)
        (setq mode-name "JS2")
+       (setq js2-strict-missing-semi-warning nil)
        (js2-imenu-extras-mode +1))
 
      (setq prelude-js-mode-hook 'prelude-js-mode-defaults)

@@ -48,6 +48,16 @@
 ("\\paragraph{%s}" . "\\paragraph*{%s}")
 ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
 
+(add-to-list 'org-latex-classes
+             '("mybeamer"
+               "
+\\documentclass[presentation]{beamer}
+\\definecolor{codebg}{rgb}{0.9,0.9,0.9}
+\\setlength{\\headheight}{15pt}"
+               ("\\section{%s}" . "\\section*{%s}")
+               ("\\subsection{%s}" . "\\subsection*{%s}")
+               ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))
+
 
 (add-to-list 'org-latex-classes
              '("org-article"
@@ -89,8 +99,7 @@
 ;; 各种Babel语言支持
 (org-babel-do-load-languages
  'org-babel-load-languages
- '((R . t)
-   (emacs-lisp . t)
+ '((emacs-lisp . t)
    (matlab . t)
    (C . t)
    (perl . t)
@@ -106,7 +115,7 @@
 
 ;; use minted as code colorizing tool
 (setq
- org-latex-listings 'minted
+ org-latex-listings nil
  org-latex-minted-options '(("bgcolor" "codebg")
                             ("linenos" "false")
                             ("frame" "lines")
@@ -114,28 +123,29 @@
                             ("framesep" "2mm"))
  )
 
-(setq org-latex-default-packages-alist
-      '(("" "fixltx2e" nil)
-        ("" "graphicx" t)
-        ("" "longtable" nil)
-        ("" "float" nil)
-        ("" "wrapfig" nil)
-        ("" "soul" t)
-        ("" "textcomp" t)
-        ("" "marvosym" t)
-        ("" "wasysym" t)
-        ("" "latexsym" t)
-        ("" "amssymb" t)
-        ("" "hyperref" nil)
-        ("" "zhfontcfg" nil)
-        ("" "listings" nil)
-        ("AUTO" "inputenc" t)
-        ;; ("" "verbatim" nil)
-        "\\tolerance=1000"))
+;; (setq org-latex-default-packages-alist
+;;       '(("" "fixltx2e" nil)
+;;         ("" "graphicx" t)
+;;         ("" "longtable" nil)
+;;         ("" "float" nil)
+;;         ("" "wrapfig" nil)
+;;         ("" "soul" t)
+;;         ("" "textcomp" t)
+;;         ("" "marvosym" t)
+;;         ("" "wasysym" t)
+;;         ("" "latexsym" t)
+;;         ("" "amssymb" t)
+;;         ("" "hyperref" nil)
+;;         ("" "zhfontcfg" nil)
+;;         ("" "listings" nil)
+;;         ("AUTO" "inputenc" t)
+;;         ;; ("" "verbatim" nil)
+;;         "\\tolerance=1000"))
 
 (setq org-latex-packages-alist
       '(("" "graphicx" nil)
         ("" "color" nil)
+        ("usenames,dvipsnames" "xcolor" nil)
         ("" "lmodern" nil)
         ("" "verbatim" nil)
         ("" "fixltx2e" nil)
@@ -152,15 +162,15 @@
         ("" "latexsym" nil)
         ("" "natbib" nil)
         ("" "zhfontcfg" nil)
-        ("" "fancyhdr" nil)
+        ;; ("" "fancyhdr" nil)
         ("" "fontspec" nil)
         ("" "xunicode" nil)
         ("" "xltxtra" nil)
         ("" "minted" nil)
         ("" "ulem" nil)
+        ("" "fancyhdr" nil)
         ("xetex,colorlinks=true,CJKbookmarks=true,linkcolor=blue,urlcolor=blue,menucolor=blue" "hyperref" nil)
         "\\hypersetup{unicode=true}
-\\pagestyle{fancy}
 \\fancyfoot[C]{\\bfseries\\thepage}
 \\chead{\\MakeUppercase\\sectionmark}
 \\tolerance=1000

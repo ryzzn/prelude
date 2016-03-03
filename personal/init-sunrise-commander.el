@@ -1,19 +1,19 @@
-(require 'sunrise-commander)
-
-(define-key global-map "\C-cx" 'sunrise)
-(define-key global-map "\C-cX" 'sunrise-cd)
-; reset windows layout
-(define-key global-map "\C-cd" 'sr-popviewer-setup-windows)
-
-; @see http://www.emacswiki.org/emacs/Sunrise_Commander_Tips#ReplaceDiredWithSunrise
-; (setq find-directory-functions (cons 'sr-dired find-directory-functions))
+;; (require 'sunrise-commander)
 
 (eval-after-load 'sunrise-commander
   '(progn
-     ; (require 'sunrise-x-buttons)
+     ;; (require 'sunrise-x-buttons)
      (require 'sunrise-x-popviewer)
 
-     ; Highlighting files with inappropriate permissions.
+     (define-key global-map "\C-cx" 'sunrise)
+     (define-key global-map "\C-cX" 'sunrise-cd)
+     ;; reset windows layout
+     (define-key global-map "\C-cd" 'sr-popviewer-setup-windows)
+
+     ;; @see http://www.emacswiki.org/emacs/Sunrise_Commander_Tips#ReplaceDiredWithSunrise
+     ;; (setq find-directory-functions (cons 'sr-dired find-directory-functions))
+
+     ;; Highlighting files with inappropriate permissions.
      (sr-rainbow sr-gorw-dir-face
                  (:background "misty rose"
                               :foreground "blue1"
