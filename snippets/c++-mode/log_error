@@ -2,5 +2,4 @@
 # name: log error msg
 # key: le
 # --
-TBSYS_LOG(ERROR, "${1:print some error msg}");$>
-$0$>
+LOG_ERROR("${1:print some error msg}");$0

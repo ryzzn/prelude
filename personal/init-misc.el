@@ -83,7 +83,10 @@
                                   "-Wno-deprecated"
                                   "-fno-strict-aliasing"
                                   "-I/usr/include""-I/usr/include/mysql"
+                                  "-Weffc++"
                                   ))
+
+(setq-default flycheck-disabled-checkers '(c/c++-clang))
 
 ;; (defadvice flymake-find-buildfile
 ;;     (around advice-find-makefile-separate-obj-dir

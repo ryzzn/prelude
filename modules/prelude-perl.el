@@ -40,7 +40,7 @@
 (define-key 'help-command "P" 'cperl-perldoc)
 
 (defun prelude-cperl-mode-defaults ()
-  (setq cperl-indent-level 2)
+  (setq cperl-indent-level 4)
   (setq cperl-continued-statement-offset 4)
   ;; cperl-hairy affects all those variables, but I prefer
   ;; a more fine-grained approach as far as they are concerned
@@ -52,6 +52,7 @@
   (setq cperl-info-on-command-no-prompt t)
   (setq cperl-clobber-lisp-bindings t)
   (setq cperl-lazy-help-time 3)
+  (setq cperl-indent-parens-as-block t)
 
   ;; if you want all the bells and whistles
   ;; (setq cperl-hairy)

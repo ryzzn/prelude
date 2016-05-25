@@ -92,6 +92,12 @@ Default build directory is set as 'build'.
   ;; @see https://github.com/seanfisk/cmake-flymake
   ;; make sure you project use cmake
   ;; (flymake-mode)
+
+  (add-hook 'ff-pre-find-hook
+          (lambda ()
+            (when (string-match ".*/src/" buffer-file-name)
+              (add-to-list ff-search-directories (match-string 0 buffer-file-name))
+              (message (match-string 0 buffer-file-name)))))
   )
 
 ;; c++-mode for h files.
