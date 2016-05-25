@@ -1,6 +1,6 @@
 ;;; prelude-programming.el --- Emacs Prelude: prog-mode configuration
 ;;
-;; Copyright © 2011-2015 Bozhidar Batsov
+;; Copyright © 2011-2016 Bozhidar Batsov
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: https://github.com/bbatsov/prelude
@@ -61,7 +61,7 @@ This functions should be added to the hooks of major modes for programming."
 (require 'smartparens)
 (sp-pair "{" nil :post-handlers
          '(((lambda (&rest _ignored)
-              (prelude-smart-open-line-above)) "RET")))
+              (crux-smart-open-line-above)) "RET")))
 
 ;; enlist a more liberal guru
 (setq guru-warn-only t)

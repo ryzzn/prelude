@@ -1,6 +1,6 @@
 ;;; prelude-packages.el --- Emacs Prelude: default package selection.
 ;;
-;; Copyright © 2011-2015 Bozhidar Batsov
+;; Copyright © 2011-2016 Bozhidar Batsov
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: https://github.com/bbatsov/prelude
@@ -36,12 +36,7 @@
 (require 'package)
 
 (add-to-list 'package-archives
-             '("org" . "http://orgmode.org/elpa/") t)
-(add-to-list 'package-archives
-             '("SC" . "http://joseito.republika.pl/sunrise-commander/") t)
-(add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/") t)
-
 ;; set package-user-dir to be relative to Prelude install path
 (setq package-user-dir (expand-file-name "elpa" prelude-dir))
 (package-initialize)
@@ -52,6 +47,7 @@
     anzu
     beacon
     browse-kill-ring
+    crux
     dash
     discover-my-major
     diff-hl
@@ -67,6 +63,7 @@
     god-mode
     grizzl
     guru-mode
+    imenu-anywhere
     ov
     projectile
     magit
@@ -77,20 +74,10 @@
     smartrep
     undo-tree
     volatile-highlights
-    yasnippet
-    dropdown-list
-    org org-journal
-    ox-reveal
-    org-plus-contrib
-    org-fstree
-    ggtags
-    header2
-    sunrise-commander
-    sunrise-x-popviewer
-    htmlize
-    color-theme-sanityinc-solarized
+    which-key
+    zenburn-theme
     zop-to-char)
-"A list of packages to ensure are installed at launch.")
+  "A list of packages to ensure are installed at launch.")
 
 (defun prelude-packages-installed-p ()
   "Check if all packages in `prelude-packages' are installed."
@@ -149,6 +136,7 @@ PACKAGE is installed only if not already present.  The file is opened in MODE."
     ("\\.coffee\\'" coffee-mode coffee-mode)
     ("\\.css\\'" css-mode css-mode)
     ("\\.csv\\'" csv-mode csv-mode)
+    ("Cask" cask-mode cask-mode)
     ("\\.d\\'" d-mode d-mode)
     ("\\.dart\\'" dart-mode dart-mode)
     ("\\.elm\\'" elm-mode elm-mode)
