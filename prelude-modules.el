@@ -33,6 +33,7 @@
 (require 'prelude-dot)
 (require 'prelude-ediff)
 (require 'prelude-misc)
+(require 'prelude-php)
 
 (provide 'prelude-modules)
 ;;; prelude-modules.el ends here

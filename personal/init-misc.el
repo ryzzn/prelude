@@ -57,6 +57,7 @@
 ;; my personal gcc
 (setq-default flycheck-c/c++-gcc-executable "/home/fufeng.syd/.local/bin/gcc")
 (setq-default flycheck-gcc-args '("-D__STDC_LIMIT_MACROS"
+                                  "-std=gnu++11"
                                   "-DSTDC_HEADERS=1"
                                   "-DHAVE_SYS_TYPES_H=1"
                                   "-DHAVE_SYS_STAT_H=1"
@@ -74,6 +75,7 @@
                                   "-I/home/fufeng.syd/ins/easy/include/easy"
                                   "-I/home/fufeng.syd/code/dev/include"
                                   "-I/home/fufeng.syd/code/dev/src"
+                                  "-I/home/fufeng.syd/code/oblib/src"
                                   "-Wall"
                                   "-Werror"
                                   "-Wextra"

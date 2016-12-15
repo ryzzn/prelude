@@ -1,6 +1,4 @@
-# -*- coding: utf-8; mode: snippet -*-
-# name: console.log
-# key: l
-# contributor: Chen Bin <chenbin.sh@gmail.com>
+# -*- mode: snippet -*-
+#name : console.log
 # --
-console.log('${1:hello world}');
+console.log($0);

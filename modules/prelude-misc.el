@@ -46,6 +46,9 @@
 (require 'session)
 (add-hook 'after-init-hook 'session-initialize)
 
+(require 'flyspell-correct-helm)
+(define-key flyspell-mode-map (kbd "<f5>") 'flyspell-correct-previous-word-generic)
+
 (provide 'prelude-misc)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
