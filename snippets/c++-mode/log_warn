@@ -2,5 +2,4 @@
 # name: log warn msg
 # key: lw
 # --
-TBSYS_LOG(WARN, "${1:print some error msg}");$>
-$0$>
+LOG_WARN("${1:print some error msg}");

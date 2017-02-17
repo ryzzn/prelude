@@ -2,4 +2,4 @@
 # name: log_info
 # key: li
 # --
-TBSYS_LOG(INFO, "${1:say something}");$0
+LOG_INFO("${1:say something}");$0
