@@ -75,7 +75,7 @@
                         (member-init-cont . 0)
                         (inher-intro . ++)
                         (comment-intro . 0)
-                        (arglist-close . c-lineup-arglist)
+                        (arglist-close . c-lineup-close-paren)
                         (topmost-intro . 0)
                         (topmost-intro-cont . 0)
                         (block-open . 0)
