@@ -70,6 +70,7 @@ Default build directory is set as 'build'.
   (setq cc-search-directories '("." ".." "/usr/include" "/usr/local/include/*"))
   (setq c-style-variables-are-local-p nil)
   (setq c-auto-newline nil)
+  (setq c-paragraph-start "\\([ \t]*$\\|[ \t]*[-+*] \\|[ \t]*[0-9]+[.)] \\)")
 
   ;; syntax-highlight aggressively
   ;; (setq font-lock-support-mode 'lazy-lock-mode)
