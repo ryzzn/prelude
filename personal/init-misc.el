@@ -114,5 +114,8 @@
 ;;         (locate-dominating-file blddir "Makefile"))
 ;;     (error source-dir)))
 
+(setq x-meta-keysym 'super)
+(setq x-super-keysym 'meta)
+
 (provide 'init-misc)
 ;;; init-misc.el ends here
