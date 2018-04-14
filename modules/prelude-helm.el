@@ -71,9 +71,13 @@
 
 (setq helm-split-window-in-side-p t)
 
+
 (global-set-key (kbd "C-c p s a") 'helm-projectile-ack)
 
 (push "Press <C-c p h> to navigate a project in Helm." prelude-tips)
+
+(prelude-require-packages 'helm-ls-git)
+(global-set-key (kbd "C-c C-f") 'helm-browse-project)
 
 (provide 'prelude-helm)
 

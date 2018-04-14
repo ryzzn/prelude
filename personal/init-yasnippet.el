@@ -1,3 +1,4 @@
+(prelude-require-package 'yasnippet)
 (require 'yasnippet)
 
 ;; default TAB key is occupied by auto-complete
@@ -8,7 +9,7 @@
 (global-set-key (kbd "C-c k") 'yas-expand)
 
 ;; ;; give yas-dropdown-prompt in yas-prompt-functions a chance
-(require 'dropdown-list)
+;; (prelude-require-package 'dropdown-list)
 (setq yas-prompt-functions '(yas-dropdown-prompt
                              yas-ido-prompt
                              yas-completing-prompt))

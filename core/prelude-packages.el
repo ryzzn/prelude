@@ -37,8 +37,6 @@
 
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/") t)
-(add-to-list 'package-archives
-             '("SC"   . "http://joseito.republika.pl/sunrise-commander/") t)
 
 ;; set package-user-dir to be relative to Prelude install path
 (setq package-user-dir (expand-file-name "elpa" prelude-dir))
@@ -79,7 +77,10 @@
     volatile-highlights
     which-key
     zenburn-theme
-    zop-to-char)
+    zop-to-char
+    flyspell-correct-helm
+    session
+    persp-mode)
   "A list of packages to ensure are installed at launch.")
 
 (defun prelude-packages-installed-p ()

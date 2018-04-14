@@ -9,7 +9,7 @@
 ;; Package-Requires: ()
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 5
+;;     Update #: 7
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -56,8 +56,8 @@
   '(progn
      (require 'org-clock)
 
-     (require 'org-checklist)
-     (require 'org-fstree)
+     ;; (require 'org-checklist)
+     ;; (require 'org-fstree)
      (setq org-ditaa-jar-path
            (expand-file-name "~/.emacs.d/elpa/contrib/scripts/ditaa.jar"))
      (add-hook 'org-mode-hook 'soft-wrap-lines)

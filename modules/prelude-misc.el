@@ -40,12 +40,6 @@
 ;; navigate window
 (window-numbering-mode)
 
-;; bind C-c C-f to ggtags, i use it very well
-(global-set-key (kbd "C-c C-f") 'ggtags-find-file)
-
-(require 'session)
-(add-hook 'after-init-hook 'session-initialize)
-
 (require 'flyspell-correct-helm)
 (define-key flyspell-mode-map (kbd "<f5>") 'flyspell-correct-previous-word-generic)
 
