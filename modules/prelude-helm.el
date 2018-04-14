@@ -76,7 +76,7 @@
 
 (push "Press <C-c p h> to navigate a project in Helm." prelude-tips)
 
-(prelude-require-packages 'helm-ls-git)
+(prelude-require-package 'helm-ls-git)
 (global-set-key (kbd "C-c C-f") 'helm-browse-project)
 
 (provide 'prelude-helm)
