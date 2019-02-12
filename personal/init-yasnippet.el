@@ -49,7 +49,7 @@
 (define-key yas-keymap (kbd "C-k") 'yas-clear-current-field)
 
 ;;; set yasnippet directory
-(setq yas-snippet-dirs "~/.emacs.d/snippets")
+(setq yas-snippet-dirs '("~/.emacs.d/snippets"))
 ;; (unless (file-exists-p yas-root-directory)
 ;;   (make-directory yas-root-directory))
 ;; (yas-load-directory yas-root-directory)

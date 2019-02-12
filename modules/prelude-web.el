@@ -1,6 +1,6 @@
 ;;; prelude-web.el --- Emacs Prelude: web template support
 ;;
-;; Copyright © 2011-2016 Bozhidar Batsov
+;; Copyright © 2011-2018 Bozhidar Batsov
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: http://www.batsov.com/emacs-prelude
@@ -68,9 +68,8 @@
        (setq web-mode-markup-indent-offset 2)
        (setq web-mode-code-indent-offset 2))
      (setq prelude-web-mode-hook 'prelude-web-mode-defaults)
-
-     (add-hook 'web-mode-hook (lambda ()
-                                (run-hooks 'prelude-web-mode-hook)))))
+  (add-hook 'web-mode-hook (lambda ()
+                             (run-hooks 'prelude-web-mode-hook))))
 
 (provide 'prelude-web)
 ;;; prelude-web.el ends here

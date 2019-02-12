@@ -1,6 +1,6 @@
 ;;; prelude-js.el --- Emacs Prelude: js-mode configuration.
 ;;
-;; Copyright © 2011-2016 Bozhidar Batsov
+;; Copyright © 2011-2018 Bozhidar Batsov
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: https://github.com/bbatsov/prelude
@@ -51,9 +51,9 @@
        (setq js2-strict-missing-semi-warning nil)
        (js2-imenu-extras-mode +1))
 
-     (setq prelude-js-mode-hook 'prelude-js-mode-defaults)
+  (setq prelude-js-mode-hook 'prelude-js-mode-defaults)
 
-     (add-hook 'js2-mode-hook (lambda () (run-hooks 'prelude-js-mode-hook)))))
+  (add-hook 'js2-mode-hook (lambda () (run-hooks 'prelude-js-mode-hook)))))
 
 (provide 'prelude-js)
 

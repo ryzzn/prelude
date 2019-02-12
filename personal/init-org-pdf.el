@@ -103,7 +103,7 @@
    (matlab . t)
    (C . t)
    (perl . t)
-   (sh . t)
+   ;;(sh . t)
    (ditaa . t)
    (python . t)
    (haskell . t)

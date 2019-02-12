@@ -117,7 +117,7 @@ do
             shift 1
             ;;
         *)
-            printf "Unkown option: $1\n"
+            printf "Unknown option: $1\n"
             shift 1
             ;;
     esac
@@ -202,7 +202,7 @@ then
     make_prelude_dirs
     # Reinstate files that weren't replaced
     tar --skip-old-files -xf "$PRELUDE_INSTALL_DIR_ORIG.pre-prelude.tar" "$PRELUDE_INSTALL_DIR" > /dev/null 2>&1
-    [ -n "$PRELUDE_INTO" ] && cp "$PRELUDE_INSTALL_DIR/sample/prelude-modules.el" "$PRELUDE_INSTALL_DIR"
+    [ -n "$PRELUDE_INTO" ] && cp "$PRELUDE_INSTALL_DIR/sample/prelude-modules.el" "$PRELUDE_INSTALL_DIR/personal"
 elif [ -e "$PRELUDE_INSTALL_DIR" ]
 then
     # File exist but not a regular file or directory
@@ -215,7 +215,7 @@ else
     # Nothing yet so just install prelude
     install_prelude
     make_prelude_dirs
-    cp "$PRELUDE_INSTALL_DIR/sample/prelude-modules.el" "$PRELUDE_INSTALL_DIR"
+    cp "$PRELUDE_INSTALL_DIR/sample/prelude-modules.el" "$PRELUDE_INSTALL_DIR/personal"
 fi
 
 if [ -z "$PRELUDE_SKIP_BC" ];
@@ -243,4 +243,4 @@ printf "$BBLUE | |_) |  __/ _ \ | | | |/ _  |/ _ \ \n"
 printf "$BBLUE |  __/| | |  __/ | |_| | (_| |  __/ \n"
 printf "$BBLUE |_|   |_|  \___|_|\__,_|\__,_|\___| \n\n"
 printf "$GREEN ... is now installed and ready to do thy bidding, Master $USER!$RESET\n"
-printf "$GREEN Don't forget to adjust the modules you want to use in $PRELUDE_INSTALL_DIR/prelude-modules.el!$RESET\n"
+printf "$GREEN Don't forget to adjust the modules you want to use in $PRELUDE_INSTALL_DIR/sample/prelude-modules.el!$RESET\n"
