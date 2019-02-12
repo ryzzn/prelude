@@ -114,8 +114,6 @@
 ;;         (locate-dominating-file blddir "Makefile"))
 ;;     (error source-dir)))
 
-(setq x-meta-keysym 'super)
-(setq x-super-keysym 'meta)
 
 (defadvice c-lineup-arglist (around my activate)
   "Improve indentation of continued C++11 lambda function opened as argument."
@@ -129,6 +127,16 @@
                      (looking-at ".*[(,][ \t]*\\[[^]]*\\][ \t]*[({][^}]*$"))))
             0                           ; no additional indent
           ad-do-it)))                   ; default behavior
+
+(if (eq system-type 'darwin)
+  (setq
+   ;; Gnu Emacs
+   ns-command-modifier 'meta
+   ns-option-modifier 'super)
+  (setq
+   ;; In VNC
+   x-meta-keysym 'super
+   x-super-keysym 'meta))
 
 (provide 'init-misc)
 ;;; init-misc.el ends here

@@ -34,6 +34,7 @@
 
 (require 'prelude-programming)
 (require 'new-oceanbase-style)
+(prelude-require-package 'ggtags)
 
 (defun ryzn/get-real-builddir (&optional upper)
   "Get relative object path of source code directory.

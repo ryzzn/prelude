@@ -40,7 +40,7 @@
   (tool-bar-mode -1))
 
 (menu-bar-mode -1)
-(scroll-bar-mode -1)
+;(scroll-bar-mode -1)
 
 ;; the blinking cursor is nothing, but an annoyance
 (blink-cursor-mode -1)
@@ -72,7 +72,9 @@
                                           "%b"))))
 
 ;; set default frame font
-(add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono 11"))
+(if (eq system-type 'darwin)
+    (add-to-list 'default-frame-alist '(font . "Consolas 14"))
+  (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono 14")))
 
 ;; ;; make background opaque in terminal emacs
 ;; (add-to-list 'after-make-frame-functions
