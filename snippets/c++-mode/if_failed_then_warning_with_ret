@@ -1,0 +1,8 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: if failed then warning with ret
+# key: iffw
+# binding: direct-keybinding
+# --
+if (FAILED($1)) {
+   LOG_WARN("$2", K(ret));
+} $0

@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: OB_ISNULL(?)
+# key: isn
+# binding: direct-keybinding
+# --
+OB_ISNULL($1)$0

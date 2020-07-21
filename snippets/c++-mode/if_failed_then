@@ -1,0 +1,8 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: if failed then
+# key: iff
+# binding: direct-keybinding
+# --
+if (FAILED($1)) {
+   $2
+} $0

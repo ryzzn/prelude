@@ -1,0 +1,42 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: check pointers if any is NULL in oceanbase
+# key: cn
+# type: command
+# --
+
+(let ((src-line (replace-regexp-in-string
+                 " *\n" "" (replace-regexp-in-string
+                            "^ *" "" (thing-at-point 'line t))))
+      (snippet "")
+      (msg-args ()))
+  (when (< 0 (length src-line))
+    (forward-line 0)
+    (kill-line)
+    (message src-line)
+    (if (or (string-match " " src-line) (string-match "^[a-zA-Z_0-9.]+$" src-line))
+        ;; space separated version
+        (progn
+          (setq snippet (mapconcat
+                         (lambda (arg)
+                           (concat "OB_ISNULL(" arg ")"))
+                         (split-string src-line)
+                         " || "))
+          (setq msg-args (mapconcat
+                          (lambda (arg)
+                            (concat "K(" arg ")"))
+                          (split-string src-line)
+                          ", "))
+          (setq snippet (concat "if (" snippet
+                                ") {\nLOG_ERROR(\"invalid argument\", "
+                                msg-args ");\n}")))
+      ;; pointer member separated version
+      (let ((prev-pt nil))
+        (setq snippet (mapconcat
+                       (lambda (arg)
+                         (if prev-pt
+                             (setq prev-pt (concat prev-pt "->" arg))
+                           (setq prev-pt arg))
+                         (concat "OB_ISNULL(" prev-pt ")"))
+                       (split-string src-line "->")
+                       " || "))))
+    (if snippet (yas-expand-snippet snippet))))

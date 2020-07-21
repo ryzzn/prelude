@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: ret = OB_ERR_UNEXPECTED;
+# key: unexp
+# --
+ret = OB_ERR_UNEXPECTED;
+LOG_ERROR("unexpected condition", K(ret));

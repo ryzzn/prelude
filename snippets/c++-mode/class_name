@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: class_name
+# key: c
+# --
+`(replace-regexp-in-string "_\\|\\.H" "" (upcase-initials (file-name-nondirectory (file-name-sans-extension (buffer-file-name)))))`

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: log_info
+# key: li
+# --
+LOG_INFO("${1:say something}");$0

@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: gtest-class
+# key: gtc
+# expand-env: ((class-name (replace-regexp-in-string "\\W" "" (upcase-initials (file-name-nondirectory (file-name-sans-extension (buffer-file-name)))))))
+# --
+class ${1:`class-name`}
+  : public ::testing::Test
+{
+  public:
+    virtual void SetUp()
+    {
+    }
+
+    virtual void TearDown()
+    {
+    }
+};
+
+$0

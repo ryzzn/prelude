@@ -51,7 +51,7 @@ PROMPT sets the `read-string prompt."
               (read-string prompt))))))
 
 (defmacro prelude-install-search-engine (search-engine-name search-engine-url search-engine-prompt)
-  "Given some information regarding a search engine, install the interactive command to search through them"
+  "Given some information regarding a search engine, install the interactive command to search through them."
   `(defun ,(intern (format "prelude-%s" search-engine-name)) ()
        ,(format "Search %s with a query or region if any." search-engine-name)
        (interactive)
@@ -158,6 +158,19 @@ This follows freedesktop standards, should work in X servers."
   `(lambda (&optional arg)
      (interactive "P")
      (sp-wrap-with-pair ,s)))
+
+(defun* get-closest-pathname (&optional (file "Makefile"))
+  "Determine the pathname of the first instance of FILE starting from the current directory towards root.
+This may not do the correct thing in presence of links. If it does not find FILE, then it shall return the name
+of FILE in the current directory, suitable for creation"
+  (let ((root (expand-file-name "/"))) ; the win32 builds should translate this correctly
+    (expand-file-name file
+                      (loop
+                       for d = default-directory then (expand-file-name ".." d)
+                       if (file-exists-p (expand-file-name file d))
+                       return d
+                       if (equal d root)
+                       return nil))))
 
 (provide 'prelude-core)
 ;;; prelude-core.el ends here

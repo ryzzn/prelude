@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: log error with return code
+# key: ler
+# --
+LOG_ERROR("${1:print some error msg}", K(ret));

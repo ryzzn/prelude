@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: log warn msg
+# key: lw
+# --
+LOG_WARN("${1:print some error msg}");

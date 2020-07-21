@@ -54,6 +54,7 @@
 ;; (the final optional t sets the *append* argument)
 
 ;; smart curly braces
+(require 'smartparens)
 (sp-pair "{" nil :post-handlers
          '(((lambda (&rest _ignored)
               (crux-smart-open-line-above)) "RET")))

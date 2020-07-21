@@ -71,6 +71,9 @@
     ;; El-doc for Go
     (go-eldoc-setup)
 
+    ;; set tab width
+    (setq tab-width 4)
+
     ;; CamelCase aware editing operations
     (subword-mode +1))
 

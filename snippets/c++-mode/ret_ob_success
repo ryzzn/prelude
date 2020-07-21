@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: assign ret ob_success
+# key: rets
+# binding: direct-keybinding
+# --
+ret = OB_SUCCESS;

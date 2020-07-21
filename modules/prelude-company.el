@@ -44,6 +44,38 @@
 ;; is displayed on top (happens near the bottom of windows)
 (setq company-tooltip-flip-when-above t)
 
+;; clang stuff
+;; @see https://github.com/brianjcj/auto-complete-clang
+(defun sydi/company-cc-mode-setup ()
+  (let ((clang-include-dir-list (list (concat (getenv "TBLIB_ROOT") "/include/tbsys")
+                                      (concat (getenv "EASY_ROOT") "/include/easy")
+                                      (get-closest-pathname "src"))))
+    (setq company-clang-arguments
+          (mapcar (lambda (item) (concat "-I" item)) clang-include-dir-list))
+    (local-set-key (kbd "M-o") 'company-clang)
+    ))
+
+(custom-set-faces
+ '(company-preview
+   ((t (:foreground "darkgray" :underline t :background "blue"))))
+ '(company-preview-search ((t (:inherit company-preview :background "blue1"))))
+ '(company-preview-common
+   ((t (:inherit company-preview :background "blue"))))
+ '(company-tooltip
+   ((t (:background "lightgray" :foreground "black"))))
+ '(company-tooltip-selection
+   ((t (:background "steelblue" :foreground "white"))))
+ '(company-tooltip-common
+   ((((type x)) (:inherit company-tooltip :weight bold :background "blue"))
+    (t (:inherit company-tooltip))))
+ '(company-tooltip-common-selection
+   ((((type x)) (:inherit company-tooltip-selection :weight bold ))
+    (t (:inherit company-tooltip-selection))))
+ '(company-scrollbar-bg ((t (:inherit company-tooltip))))
+ '(company-tooltip ((t (:inherit font-lock-builtin-face))))
+ '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection))))
+ '(company-tooltip-selection ((t (:inherit company-tooltip :background "dark cyan")))))
+
 (global-company-mode 1)
 
 (provide 'prelude-company)

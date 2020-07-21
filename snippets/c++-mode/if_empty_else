@@ -1,0 +1,10 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: if with empty else
+# key: iee
+# binding: direct-keybinding
+# --
+if ($1) {
+  $0
+} else {
+  // empty
+}

@@ -40,6 +40,7 @@
   (tool-bar-mode -1))
 
 (menu-bar-mode -1)
+;(scroll-bar-mode -1)
 
 ;; the blinking cursor is nothing, but an annoyance
 (blink-cursor-mode -1)
@@ -69,6 +70,17 @@
       '("" invocation-name " Prelude - " (:eval (if (buffer-file-name)
                                             (abbreviate-file-name (buffer-file-name))
                                           "%b"))))
+
+;; set default frame font
+(if (eq system-type 'darwin)
+    (add-to-list 'default-frame-alist '(font . "Consolas 14"))
+  (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono 14")))
+
+;; ;; make background opaque in terminal emacs
+;; (add-to-list 'after-make-frame-functions
+;;              (lambda (frame)
+;;                (if (eq window-system nil)
+;;                    (set-frame-parameter frame 'background-color "unspecified-bg"))))
 
 ;; use zenburn as the default theme
 (when prelude-theme

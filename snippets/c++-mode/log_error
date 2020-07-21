@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: log error msg
+# key: le
+# --
+LOG_ERROR("${1:print some error msg}");$0
