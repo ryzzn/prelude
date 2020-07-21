@@ -1,6 +1,7 @@
 ;;; Code:
 
 (require 'easy-utils)
+(global-set-key (kbd "C-x C-m") 'counsel-M-x)
 
 (add-auto-mode 'mail-mode "/mutt-sydi-[-0-9]+$")
 (setq user-full-name "Shi Yudi")
