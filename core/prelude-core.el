@@ -159,7 +159,7 @@ This follows freedesktop standards, should work in X servers."
      (interactive "P")
      (sp-wrap-with-pair ,s)))
 
-(defun* get-closest-pathname (&optional (file "Makefile"))
+(cl-defun get-closest-pathname (&optional (file "Makefile"))
   "Determine the pathname of the first instance of FILE starting from the current directory towards root.
 This may not do the correct thing in presence of links. If it does not find FILE, then it shall return the name
 of FILE in the current directory, suitable for creation"

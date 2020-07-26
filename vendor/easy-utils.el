@@ -74,14 +74,13 @@
   (interactive)
   (browse-url-generic (concat "file://" (buffer-file-name))))
 
-
-(require 'cl)
+(require 'cl-lib)
 
 (defmacro with-selected-frame (frame &rest forms)
-  (let ((prev-frame (gensym))
+  (cl-let* ((prev-frame (gensym))
         (new-frame (gensym)))
     `(progn
-       (let* ((,new-frame (or ,frame (selected-frame)))
+       (let ((,new-frame (or ,frame (selected-frame)))
               (,prev-frame (selected-frame)))
          (select-frame ,new-frame)
          (unwind-protect

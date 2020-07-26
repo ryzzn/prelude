@@ -1,7 +1,7 @@
 ;;; Code:
 
 (require 'easy-utils)
-(global-set-key (kbd "C-x C-m") 'counsel-M-x)
+(global-set-key (kbd "C-x C-m") 'helm-M-x)
 
 (add-auto-mode 'mail-mode "/mutt-sydi-[-0-9]+$")
 (setq user-full-name "Shi Yudi")
@@ -115,20 +115,6 @@
 ;;         (locate-dominating-file blddir "Makefile"))
 ;;     (error source-dir)))
 
-
-(defadvice c-lineup-arglist (around my activate)
-  "Improve indentation of continued C++11 lambda function opened as argument."
-  (setq ad-return-value
-        (if (and (equal major-mode 'c++-mode)
-                 (ignore-errors
-                   (save-excursion
-                     (goto-char (c-langelem-pos langelem))
-                     ;; Detect "[...](" or "[...]{". preceded by "," or "(",
-                     ;;   and with unclosed brace.
-                     (looking-at ".*[(,][ \t]*\\[[^]]*\\][ \t]*[({][^}]*$"))))
-            0                           ; no additional indent
-          ad-do-it)))                   ; default behavior
-
 (if (eq system-type 'darwin)
   (setq
    ;; Gnu Emacs
@@ -138,6 +124,10 @@
    ;; In VNC
    x-meta-keysym 'super
    x-super-keysym 'meta))
+
+(use-package doom-modeline
+  :ensure t
+  :init (doom-modeline-mode 1))
 
 (provide 'init-misc)
 ;;; init-misc.el ends here

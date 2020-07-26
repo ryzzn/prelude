@@ -80,6 +80,7 @@
                         (topmost-intro-cont . 0)
                         (block-open . 0)
                         (inline-open . 0)
+                        (inlambda . 0) ; no extra indent for lambda
                         (substatement-open . 0)
                         (statement-cont
                          .
