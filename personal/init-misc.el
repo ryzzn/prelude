@@ -129,5 +129,9 @@
   :ensure t
   :init (doom-modeline-mode 1))
 
+;; change default directory to HOME from useless root.
+(let ((pwd (getenv "PWD")))
+  (unless (stringp pwd) (cd "~")))
+
 (provide 'init-misc)
 ;;; init-misc.el ends here
