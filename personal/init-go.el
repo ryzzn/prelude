@@ -7,11 +7,16 @@
   :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
          (go-mode . lsp)
          ;; if you want which-key integration
-         (lsp-mode . lsp-enable-which-key-integration))
+         (lsp-mode . lsp-enable-which-key-integration)
+         )
   :commands lsp)
 
 ;; optionally
-(use-package lsp-ui :commands lsp-ui-mode)
+(use-package lsp-ui :commands lsp-ui-mode
+  :config
+  (setq lsp-ui-doc-enable nil
+        lsp-ui-flycheck-enable nil))
+
 ;; if you are helm user
 (use-package helm-lsp :commands helm-lsp-workspace-symbol)
 ;; if you are ivy user
@@ -47,10 +52,13 @@
   (defun go-mode-setup ()
     ;; (linum-mode 1)
     ;; (go-eldoc-setup)
-    (setq gofmt-command "goimports")
-    (add-hook 'before-save-hook 'gofmt-before-save)
+    ;; (setq gofmt-command "goimports")
     (setq compilation-read-command nil)
     (setq tab-width 4)
+
+    (if (package-installed-p 'super-save)
+        (super-save-mode 0))
+
 
     ;; ;; Set up before-save hooks to format buffer and add/delete imports.
     ;; ;; Make sure you don't have other gofmt/goimports hooks enabled.
@@ -74,7 +82,7 @@
     ;;              :hook (go-mode . yas-minor-mode))
 
     (setq read-process-output-max 1048576)
-    (whitespace-toggle-options '(tabs)))
+    (whitespace-toggle-options '(indentation::tab)))
   :config
   (add-hook 'go-mode-hook (lambda ()
                             (go-mode-setup))))
